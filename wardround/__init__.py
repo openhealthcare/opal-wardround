@@ -19,6 +19,9 @@ class WardRoundsPlugin(OpalPlugin):
             'js/wardround/controllers/wardround.js',
         ]
     }
+    menuitems = [
+        dict(href="/wardround/", display="Ward Rounds")
+    ]
 
 
 class BaseWardRound(object):
