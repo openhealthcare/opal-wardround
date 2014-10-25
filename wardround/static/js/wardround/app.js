@@ -50,4 +50,15 @@ app.config(function($routeProvider){
             },
             templateUrl: '/wardround/templates/detail.html'
         })
+        .when('/:wardround/:episode_id', {
+            controller: 'WardRoundDetailCtrl',
+            resolve: {
+		schema: function(detailSchemaLoader) { return detailSchemaLoader; },
+                ward_round: function(wardRoundLoader){ return wardRoundLoader() },
+		options: function(Options) { return Options; },
+                profile: function(UserProfile){ return UserProfile }
+
+            },
+            templateUrl: '/wardround/templates/episode_detail.html'
+        })
 })

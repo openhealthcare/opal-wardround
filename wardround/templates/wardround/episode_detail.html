@@ -1,0 +1,43 @@
+<div class="container content-offset">
+
+  <div class="panel panel-warning">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <h2>
+        ([[ ward_round.name]] )[[episode.demographics[0].name]]
+        <small>
+          [[episode.demographics[0].hospital_number]]
+          [[episode.demographics[0].date_of_birth | shortDate]]
+        </small>
+
+        
+        <button type="button" class="btn btn-lg btn-danger pull-right"
+                ng-click="next()"
+                >
+          Next
+          <i class="fa fa-chevron-right"></i>
+        </button>
+        <button type="button" class="btn btn-lg btn-danger pull-right"
+                ng-click="wardRoundOrderCollapsed = !wardRoundOrderCollapsed"
+                >
+          Episode [[ this_episode_number + 1 ]] of [[ total_episodes ]]
+          <i class="fa fa-tasks"></i>
+        </button>
+        <button type="button" class="btn btn-lg btn-danger pull-right"
+                ng-click="previous()"
+                >
+          <i class="fa fa-chevron-left"></i>
+          Previous
+        </button>
+      </h2>
+    </div>
+      <div collapse="wardRoundOrderCollapsed">
+        {% with icon="fa fa-chevron-right" %}
+        {% include '_episode_summary_table.html' %}
+        {% endwith %}
+      </div>
+    {% include '_episode_detail.html' %}
+  </div>
+  
+</div>
+

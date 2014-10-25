@@ -17,6 +17,7 @@ class WardRoundsPlugin(OpalPlugin):
             'js/wardround/services/ward_round_loader.js',
             'js/wardround/controllers/list.js',
             'js/wardround/controllers/wardround.js',
+            'js/wardround/controllers/episode_detail.js',
         ]
     }
     menuitems = [
@@ -41,9 +42,11 @@ class BaseWardRound(object):
      
     @classmethod
     def to_dict(klass, user):
+        from opal.models import Episode
+
         return dict(name=klass.name, 
-                    description=klass.description, 
-                    episodes=[e.to_dict(user) for e in klass.episodes()])
+                    description=klass.description,
+                    episodes=Episode.objects.serialised(user, klass.episodes()))
 
 
 class WardRound(BaseWardRound):

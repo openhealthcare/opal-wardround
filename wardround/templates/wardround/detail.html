@@ -2,11 +2,19 @@
   <div class="panel panel-warning">
     <!-- Default panel contents -->
     <div class="panel-heading">
-      <h2>[[ ward_round.name ]] Ward Round</h2>
+      <h2>
+        [[ ward_round.name ]] Ward Round
+      <button type="button" class="btn btn-lg btn-danger pull-right"
+              ng-click="start()"
+              >
+        Start
+        <i class="fa fa-play-circle"></i>
+      </button>
+
+      </h2>
       <h4>[[ results.length ]] Episodes</h4>
     </div>
-    <div class="panel-body">
-      
+    <div class="panel-body">      
       {% include '_episode_summary_table.html' %}
     </div>
   </div>

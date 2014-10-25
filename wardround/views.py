@@ -1,9 +1,12 @@
 """
 Views for the OPAL Wardrounds plugin
 """
+from django.conf import settings
 from django.views.generic import View, TemplateView
 
+from opal.utils import stringport
 from opal.utils.views import LoginRequiredMixin, _build_json_response
+#from opal.views.core import EpisodeTemplateView, schema
 
 
 class WardRoundIndexView(LoginRequiredMixin, TemplateView):
@@ -34,9 +37,23 @@ class WardRoundView(LoginRequiredMixin, View):
     """
     def get(self, *args, **kwargs):
         from wardround import WardRound
+        
+        wardround = WardRound.get(kwargs['name'])
+        serialised = _build_json_response(wardround.to_dict(self.request.user))
+        return serialised
 
-        wardround = WardRound.get(kwargs['name'])        
-        return _build_json_response(wardround.to_dict(self.request.user))
+
+#class WardRoundEpisodeDetailTemplateView(EpisodeTemplateView):
+class WardRoundEpisodeDetailTemplateView(TemplateView):
+    template_name = 'wardround/episode_detail.html'
+    
+    def get_context_data(self, *args, **kwargs):
+        from opal.views.core import schema
+        from opal.views.templates import _get_column_context
+        
+        context = super(WardRoundEpisodeDetailTemplateView, self).get_context_data(*args, **kwargs)
+        context['columns'] = _get_column_context(schema.detail_columns, **kwargs)
+        return context
 
 
 class WardRoundTemplateView(TemplateView):
