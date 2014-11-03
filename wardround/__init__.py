@@ -1,10 +1,30 @@
 """
 Plugin definition
 """
-from opal.utils import OpalPlugin, camelcase_to_underscore
+from django.conf import settings
+
+from opal.utils import OpalPlugin, camelcase_to_underscore, stringport
 
 from wardround.urls import urlpatterns
 
+# So we only do it once
+IMPORTED_FROM_APPS = False
+
+def import_from_apps():
+    """
+    Iterate through installed apps attempting to import app.wardrounds
+    This way we allow our implementation, or plugins, to define their
+    own ward rounds. 
+    """
+    print "Importing from apps"
+    for app in settings.INSTALLED_APPS:
+        try:
+            wr = stringport(app + '.wardrounds')
+        except ImportError:
+            pass # not a problem
+    IMPORTED_FROM_APPS = True
+    return
+    
 class WardRoundsPlugin(OpalPlugin):
     """
     Main entrypoint to expose this plugin to the host
@@ -32,9 +52,24 @@ class BaseWardRound(object):
 
     @classmethod
     def get(klass, name):
+        """
+        Return a specific ward round by slug
+        """
+        if not IMPORTED_FROM_APPS:
+            import_from_apps()
+            
         for sub in klass.__subclasses__():
             if sub.slug() == name:
                 return sub
+            
+    @classmethod
+    def list(klass):
+        """
+        Return a list of all ward rounds
+        """
+        if not IMPORTED_FROM_APPS:
+            import_from_apps()
+        return klass.__subclasses__()
 
     @classmethod
     def slug(klass):

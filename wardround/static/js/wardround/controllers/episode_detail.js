@@ -3,7 +3,7 @@
 //
 angular.module('opal.wardround.controllers').controller(
    'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
-                                   EpisodeDetailMixin,
+                                   EpisodeDetailMixin, Flow,
                                    schema,
                                    ward_round, options, profile){
 
@@ -15,6 +15,8 @@ angular.module('opal.wardround.controllers').controller(
        
        $scope.options = options;
        $scope.profile = profile;
+       $scope.schema = schema;
+       $scope.Flow = Flow;
 
        EpisodeDetailMixin($scope);
 

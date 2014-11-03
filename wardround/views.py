@@ -6,7 +6,6 @@ from django.views.generic import View, TemplateView
 
 from opal.utils import stringport
 from opal.utils.views import LoginRequiredMixin, _build_json_response
-#from opal.views.core import EpisodeTemplateView, schema
 
 
 class WardRoundIndexView(LoginRequiredMixin, TemplateView):
@@ -43,7 +42,6 @@ class WardRoundView(LoginRequiredMixin, View):
         return serialised
 
 
-#class WardRoundEpisodeDetailTemplateView(EpisodeTemplateView):
 class WardRoundEpisodeDetailTemplateView(TemplateView):
     template_name = 'wardround/episode_detail.html'
     
@@ -67,5 +65,5 @@ class WardRoundTemplateView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(WardRoundTemplateView, self).get_context_data(**kwargs)
         from wardround import WardRound        
-        context['wardrounds'] = WardRound.__subclasses__()
+        context['wardrounds'] = WardRound.list()
         return context
