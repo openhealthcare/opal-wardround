@@ -41,7 +41,7 @@ class WardRoundsPlugin(OpalPlugin):
         ]
     }
     menuitems = [
-        dict(href="/wardround/", display="Ward Rounds")
+        dict(href="/wardround/", display="Ward Rounds", icon="fa fa-tasks")
     ]
 
 
