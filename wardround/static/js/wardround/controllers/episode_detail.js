@@ -3,12 +3,16 @@
 //
 angular.module('opal.wardround.controllers').controller(
    'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
+                                   $cookieStore,
                                    EpisodeDetailMixin, Flow,
                                    schema,
                                    ward_round, options, profile){
 
+       $scope.filters = $cookieStore.get('wardround_filters');
+       console.log($scope.filters);
+       
        $scope.ward_round = ward_round;
-       $scope.results = ward_round.episodes;
+       $scope.episodes = ward_round.episodes;
        $scope.limit = ward_round.episodes.length;
        $scope.episode_id = $routeParams.episode_id;
        $scope.episode = _.findWhere($scope.ward_round.episodes, {id: parseInt($scope.episode_id)});
@@ -20,9 +24,25 @@ angular.module('opal.wardround.controllers').controller(
 
        EpisodeDetailMixin($scope);
 
-       $scope.total_episodes = ward_round.episodes.length;
-       $scope.this_episode_number = _.indexOf(_.pluck(ward_round.episodes, 'id'), parseInt($scope.episode_id));
        $scope.wardRoundOrderCollapsed = true;
+
+        //
+        // Iterate over our active filters and restrict the episodes accordingly
+        //
+        $scope.set_visible_episodes = function(){
+            var episodes = $scope.episodes;
+            _.each(_.keys($scope.filters), function(filter){
+                var filter_expression = $scope.ward_round.filters[filter];
+                episodes = _.filter(episodes, function(episode){
+                    var value = $scope.filters[filter];
+                    return eval(filter_expression);
+                });
+            });
+            $scope.results = episodes;
+        };
+       $scope.set_visible_episodes();
+       $scope.total_episodes = $scope.results.length;
+       $scope.this_episode_number = _.indexOf(_.pluck($scope.results, 'id'), parseInt($scope.episode_id));
        
        $scope.jumpToEpisode = function(e){
            $location.path($routeParams.wardround + '/' + e.id);

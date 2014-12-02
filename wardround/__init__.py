@@ -81,7 +81,9 @@ class BaseWardRound(object):
 
         return dict(name=klass.name, 
                     description=klass.description,
-                    episodes=Episode.objects.serialised(user, klass.episodes()))
+                    episodes=Episode.objects.serialised(user, klass.episodes()),
+                    filters=klass.filters)
+
 
 
 class WardRound(BaseWardRound):
@@ -90,7 +92,10 @@ class WardRound(BaseWardRound):
     """
     name        = 'PLEASE NAME ME Larry!'
     description = 'PLEASE DESCRIBE ME Larry!'
-
+    
+    filter_template = None
+    filters         = {}
+    
     @staticmethod
     def episodes():
         """

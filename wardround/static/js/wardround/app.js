@@ -11,6 +11,7 @@ var controllers = OPAL.module('opal.wardround.controllers', [
 var app = OPAL.module('opal.wardround', [
     'ngRoute',
     'ngProgressLite',
+    'ngCookies',
     'opal.filters',
     'opal.services',
     'opal.directives',
@@ -48,7 +49,9 @@ app.config(function($routeProvider){
             resolve: {
                 ward_round: function(wardRoundLoader){ return wardRoundLoader() } 
             },
-            templateUrl: '/wardround/templates/detail.html'
+            templateUrl: function(params){
+                return '/wardround/templates/' + params.wardround + '/detail.html';
+            }
         })
         .when('/:wardround/:episode_id', {
             controller: 'WardRoundDetailCtrl',

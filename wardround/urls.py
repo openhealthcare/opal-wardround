@@ -13,4 +13,6 @@ urlpatterns = patterns(
         views.WardRoundEpisodeDetailTemplateView.as_view()),
     url(r'^wardround/templates/(?P<name>[a-z_]+.html)$',
         views.WardRoundTemplateView.as_view()),
+    url(r'^wardround/templates/(?P<wardround_name>[a-z_]+)/(?P<name>[a-z_]+.html)$',
+        views.WardRoundTemplateView.as_view()),
 )

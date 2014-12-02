@@ -14,7 +14,20 @@
       </h2>
       <h4>[[ results.length ]] Episodes</h4>
     </div>
-    <div class="panel-body">      
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>
+            <i class="fa fa-filter"></i>
+            Filters
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+      {% if wardround.filter_template %}
+        {% include wardround.filter_template %}
+      {% endif %} 
       {% include '_episode_summary_table.html' %}
+      </div>
     </div>
   </div>

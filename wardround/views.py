@@ -66,4 +66,6 @@ class WardRoundTemplateView(TemplateView):
         context = super(WardRoundTemplateView, self).get_context_data(**kwargs)
         from wardround import WardRound        
         context['wardrounds'] = WardRound.list()
+        if 'wardround_name' in kwargs:
+            context['wardround'] = WardRound.get(kwargs['wardround_name'])
         return context
