@@ -3,7 +3,7 @@
 //
 angular.module('opal.wardround.controllers').controller(
    'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
-                                   $cookieStore,
+                                   $cookieStore, $modal,
                                    EpisodeDetailMixin, Flow,
                                    schema,
                                    ward_round, options, profile){
@@ -55,5 +55,18 @@ angular.module('opal.wardround.controllers').controller(
        $scope.previous = function(){
            $scope.jumpToEpisode($scope.results[$scope.this_episode_number - 1]);
        };
+
+       $scope.named_controller = function(template, controller){
+           $modal.open({
+               templateUrl: template,
+               controller: controller,
+               resolve: {
+                   episode: function(){ return $scope.episode },
+                   tags: function(){ return {}  },
+                   schema: function(){ return {} },
+                   options: function(){ return {} }
+               }
+           });
+       }
    }
 );
