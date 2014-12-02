@@ -62,6 +62,8 @@ app.config(function($routeProvider){
                 profile: function(UserProfile){ return UserProfile }
 
             },
-            templateUrl: '/wardround/templates/episode_detail.html'
+            templateUrl: function(params){
+                return '/wardround/templates/' + params.wardround + '/episode_detail.html'
+            }
         })
 })

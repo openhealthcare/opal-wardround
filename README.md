@@ -25,3 +25,12 @@ the value being an expression to eval. This expression will have access to the f
 
  - episode: the OPAL Episode() instance
  - value: the value of your filter as set by the UI.
+
+
+### Schemas
+
+Your wardround detail view may restrict the available fields by implementing the `schema()` classmethod.
+
+This method should return a column schema (an ordered iterable of models.)
+
+This returns opal.views.core.schema.detail_columns by default. 

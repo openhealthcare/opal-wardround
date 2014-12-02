@@ -104,3 +104,16 @@ class WardRound(BaseWardRound):
         that are 'on' this ward round.
         """
         return []
+
+    @staticmethod
+    def schema():
+        """
+        Subclasses should override this method in order to define a field
+        schema for your wardround.
+
+        You should return an iterable of OPAL subrecord models. 
+        
+        It defaults to opal.views.core.schema.detail_columns.
+        """
+        from opal.views.core import schema
+        return schema.detail_columns

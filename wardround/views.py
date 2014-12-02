@@ -46,11 +46,21 @@ class WardRoundEpisodeDetailTemplateView(TemplateView):
     template_name = 'wardround/episode_detail.html'
     
     def get_context_data(self, *args, **kwargs):
-        from opal.views.core import schema
+        """
+        Set up the column context.
+
+        The heavy lifting is done by an OPAL core utility function, we mostly
+        determine the correct schema.
+        """
         from opal.views.templates import _get_column_context
+
+        from wardround import WardRound
+        schema = WardRound.schema()
+        if 'wardround_name' in kwargs:
+            schema = WardRound.get(kwargs['wardround_name']).schema()
         
         context = super(WardRoundEpisodeDetailTemplateView, self).get_context_data(*args, **kwargs)
-        context['columns'] = _get_column_context(schema.detail_columns, **kwargs)
+        context['columns'] = _get_column_context(schema, **kwargs)
         return context
 
 
