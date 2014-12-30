@@ -24,6 +24,7 @@ def import_from_apps():
             pass # not a problem
     IMPORTED_FROM_APPS = True
     return
+
     
 class WardRoundsPlugin(OpalPlugin):
     """
@@ -41,7 +42,9 @@ class WardRoundsPlugin(OpalPlugin):
         ]
     }
     menuitems = [
-        dict(href="/wardround/", display="Ward Rounds", icon="fa fa-tasks")
+        dict(
+            href="/wardround/", display="Ward Rounds", icon="fa fa-tasks",
+            activepattern='/wardround')
     ]
 
 
