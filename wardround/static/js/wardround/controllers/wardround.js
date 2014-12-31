@@ -11,9 +11,18 @@ angular.module('opal.wardround.controllers').controller(
         $scope.limit = 10;
         $scope.filters = {};
 
+
         $scope.jumpToEpisode = function(episode){
-            window.open('/#/episode/'+episode.id, '_blank');
+           $location.path($routeParams.wardround + '/' + episode.id);
         };
+
+        //
+        // Dive straight in if we have no filters. c.f. openhealthcare/opal-wardround#13
+        //
+        if(_.keys($scope.ward_round.filters).length == 0){
+            $scope.jumpToEpisode($scope.episodes[0]);
+            return
+        }
 
         //
         // Iterate over our active filters and restrict the episodes accordingly
