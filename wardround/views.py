@@ -1,10 +1,8 @@
 """
 Views for the OPAL Wardrounds plugin
 """
-from django.conf import settings
 from django.views.generic import View, TemplateView
 
-from opal.utils import stringport
 from opal.utils.views import LoginRequiredMixin, _build_json_response
 
 

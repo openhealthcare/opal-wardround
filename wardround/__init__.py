@@ -81,16 +81,6 @@ class BaseWardRound(object):
     def slug(klass):
         return camelcase_to_underscore(klass.name).replace(' ', '')
      
-    @classmethod
-    def to_dict(klass, user):
-        from opal.models import Episode
-
-        return dict(name=klass.name, 
-                    description=klass.description,
-                    episodes=Episode.objects.serialised(user, klass.episodes()),
-                    filters=klass.filters)
-
-
 
 class WardRound(BaseWardRound):
     """
@@ -123,3 +113,18 @@ class WardRound(BaseWardRound):
         """
         from opal.views.core import schema
         return schema.detail_columns
+
+    @classmethod
+    def to_dict(klass, user):
+        """
+        If you need to change the way episodes are serialised - e.g. to insert
+        extra data, subclassing this method would be a good place to do it!
+        """
+        from opal.models import Episode
+
+        return dict(name=klass.name, 
+                    description=klass.description,
+                    episodes=Episode.objects.serialised(user, klass.episodes()),
+                    filters=klass.filters)
+
+
