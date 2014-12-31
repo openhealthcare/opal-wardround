@@ -26,6 +26,18 @@ the value being an expression to eval. This expression will have access to the f
  - episode: the OPAL Episode() instance
  - value: the value of your filter as set by the UI.
 
+#### Filter Helpers
+
+The wardrounds plugin also defines a Django Templatetag library that contains commonly used filters such as "Filter by team".
+
+(Note if you want to filter by historic teams you will need to override the serialisation staticmethod `.to_dict`
+
+```html
+{% load wardrounds %}
+<form class="form-horizontal col-md-8" role="form">
+  {% team_filter %}
+</form>
+```
 
 ### Schemas
 
