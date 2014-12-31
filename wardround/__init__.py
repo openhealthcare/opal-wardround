@@ -19,9 +19,10 @@ def import_from_apps():
     print "Importing from apps"
     for app in settings.INSTALLED_APPS:
         try:
-            wr = stringport(app + '.wardrounds')
+            stringport(app + '.wardrounds')
         except ImportError:
             pass # not a problem
+    global IMPORTED_FROM_APPS
     IMPORTED_FROM_APPS = True
     return
 
@@ -52,7 +53,9 @@ class BaseWardRound(object):
     """
     Ward round utility methods - shouldn't have to override these !
     """
-
+    name        = None
+    description = None
+    
     @classmethod
     def get(klass, name):
         """
