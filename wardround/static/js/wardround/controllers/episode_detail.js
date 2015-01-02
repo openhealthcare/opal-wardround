@@ -64,7 +64,7 @@ angular.module('opal.wardround.controllers').controller(
                    episode: function(){ return $scope.episode },
                    tags: function(){ return {}  },
                    schema: function(){ return {} },
-                   options: function(){ return {} }
+                   options: function(){ return options }
                }
            });
        }
