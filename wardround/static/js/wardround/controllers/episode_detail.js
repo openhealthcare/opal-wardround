@@ -8,7 +8,7 @@ angular.module('opal.wardround.controllers').controller(
                                    schema,
                                    ward_round, options, profile){
 
-       $scope.filters = $cookieStore.get('wardround_filters');
+       $scope.filters = $cookieStore.get('wardround_filters') || [];
        console.log($scope.filters);
        
        $scope.ward_round = ward_round;
