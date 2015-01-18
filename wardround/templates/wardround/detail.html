@@ -16,6 +16,11 @@
     </div>
     <div class="panel-body">
       <div class="row">
+        <div class="col-md-12" ng-show="episodes.length == 0">
+          <p class="lead">
+            No episodes currently match this ward round's criteria.
+          </p>
+        </div>
       {% if wardround.filter_template %}
         <div class="col-md-12">
           <h3>

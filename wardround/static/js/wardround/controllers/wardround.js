@@ -13,13 +13,13 @@ angular.module('opal.wardround.controllers').controller(
 
 
         $scope.jumpToEpisode = function(episode){
-           $location.path($routeParams.wardround + '/' + episode.id);
+            $location.path($routeParams.wardround + '/' + episode.id);
         };
 
         //
         // Dive straight in if we have no filters. c.f. openhealthcare/opal-wardround#13
         //
-        if(_.keys($scope.ward_round.filters).length == 0){
+        if($scope.episodes.length > 0 && _.keys($scope.ward_round.filters).length == 0){
             $scope.jumpToEpisode($scope.episodes[0]);
             return
         }
