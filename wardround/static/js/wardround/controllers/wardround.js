@@ -20,8 +20,7 @@ angular.module('opal.wardround.controllers').controller(
         // Dive straight in if we have no filters. c.f. openhealthcare/opal-wardround#13
         //
         if($scope.episodes.length > 0 && _.keys($scope.ward_round.filters).length == 0){
-            $scope.jumpToEpisode($scope.episodes[0]);
-            return
+            $scope.start();
         }
 
         //
