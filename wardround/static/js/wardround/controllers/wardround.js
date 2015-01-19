@@ -17,13 +17,6 @@ angular.module('opal.wardround.controllers').controller(
         };
 
         //
-        // Dive straight in if we have no filters. c.f. openhealthcare/opal-wardround#13
-        //
-        if($scope.episodes.length > 0 && _.keys($scope.ward_round.filters).length == 0){
-            $scope.start();
-        }
-
-        //
         // Iterate over our active filters and restrict the episodes accordingly
         //
         $scope.set_visible_episodes = function(){
@@ -46,5 +39,13 @@ angular.module('opal.wardround.controllers').controller(
             $cookieStore.put('wardround_filters', $scope.filters);
             $location.path($routeParams.wardround + '/' + $scope.results[0].id);
         };
+
+        //
+        // Dive straight in if we have no filters. c.f. openhealthcare/opal-wardround#13
+        //
+        if($scope.episodes.length > 0 && _.keys($scope.ward_round.filters).length == 0){
+            $scope.start();
+        }
+
 
     });
