@@ -4,7 +4,7 @@ Views for the OPAL Wardrounds plugin
 from django.views.generic import View, TemplateView
 
 from opal.utils.views import LoginRequiredMixin, _build_json_response
-
+from opal.utils.models import subrecords
 
 class WardRoundIndexView(LoginRequiredMixin, TemplateView):
     """
@@ -41,27 +41,21 @@ class WardRoundView(LoginRequiredMixin, View):
 
 
 class WardRoundEpisodeDetailTemplateView(TemplateView):
-    template_name = 'wardround/episode_detail.html'
-    
-    def get_context_data(self, *args, **kwargs):
-        """
-        Set up the column context.
-
-        The heavy lifting is done by an OPAL core utility function, we mostly
-        determine the correct schema.
-        """
-        from opal.views.templates import _get_column_context
-
+    def dispatch(self, *args, **kwargs):
         from wardround import WardRound
-        schema = WardRound.schema()
+        self.wardround = WardRound
         if 'wardround_name' in kwargs:
-            schema = WardRound.get(kwargs['wardround_name']).schema()
-        
-        context = super(WardRoundEpisodeDetailTemplateView, self).get_context_data(*args, **kwargs)
-        context['columns'] = _get_column_context(schema, **kwargs)
+            self.wardround = WardRound.get(kwargs['wardround_name'])
+        return super(WardRoundEpisodeDetailTemplateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(WardRoundEpisodeDetailTemplateView, self).get_context_data(**kwargs)
+        context['models'] = { m.__name__: m for m in subrecords() }
         return context
 
-
+    def get_template_names(self, *args, **kwargs):
+        return [self.wardround.detail_template]
+    
 class WardRoundTemplateView(TemplateView):
     def dispatch(self, *args, **kwargs):
         self.name = kwargs['name']

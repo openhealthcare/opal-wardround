@@ -1,3 +1,16 @@
+{% extends 'detail/two_column.html' %}
+{% block heading %}
+[[episode.demographics[0].name]]
+{% endblock %}
+{% block subheading %}
+([[ ward_round.name]])
+{% endblock %}
+
+{% block left_column %}
+  {% include 'detail/_demographics_location_panels.html' %}
+{% endblock %}
+
+
 <div class="container content-offset">
 
   <div class="panel panel-primary">
@@ -5,11 +18,11 @@
     <div class="panel-heading">
       <h2>
         <small>
-        ([[ ward_round.name]])
+
         </small>
       </h2>
       <h2>
-        [[episode.demographics[0].name]]
+
         <small>
           [[episode.demographics[0].hospital_number]]
           [[episode.demographics[0].date_of_birth | shortDate]]

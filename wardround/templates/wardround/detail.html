@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-12" ng-show="episodes.length == 0">
           <p class="lead">
-            No episodes currently match this ward round's criteria.
+            <b>No episodes</b> currently match this ward round's criteria.
           </p>
         </div>
         {% if wardround.filter_template %}
@@ -26,7 +26,7 @@
       <div class="row">
         {% include wardround.filter_template %}
         {% endif %} 
-        <div class="col-md-12">
+        <div class="col-md-12" ng-hide="episodes.length == 0">
           <p>
             <button type="button" class="btn btn-lg btn-primary"
                     ng-click="start()"
