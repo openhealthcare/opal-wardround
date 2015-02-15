@@ -3,14 +3,8 @@
     <!-- Default panel contents -->
     <div class="panel-heading">
       <h2>
+        <i class="fa fa-tasks"></i>
         [[ ward_round.name ]] Ward Round
-      <button type="button" class="btn btn-lg btn-danger pull-right"
-              ng-click="start()"
-              >
-        Start
-        <i class="fa fa-play-circle"></i>
-      </button>
-
       </h2>
       <h4>[[ results.length ]] Episodes</h4>
     </div>
@@ -21,18 +15,30 @@
             No episodes currently match this ward round's criteria.
           </p>
         </div>
-      {% if wardround.filter_template %}
+        {% if wardround.filter_template %}
         <div class="col-md-12">
           <h3>
             <i class="fa fa-filter"></i>
-            Filters
+            Filter these patients
           </h3>
         </div>
       </div>
       <div class="row">
         {% include wardround.filter_template %}
-      {% endif %} 
-      {% include '_episode_summary_table.html' %}
+        {% endif %} 
+        <div class="col-md-12">
+          <p>
+            <button type="button" class="btn btn-lg btn-primary"
+                    ng-click="start()"
+                    >
+              <i class="fa fa-arrow-right"></i>
+              Start this ward round
+            </button>
+          </p>
+
+        </div> 
+
+        {% include '_episode_summary_table.html' %}
       </div>
     </div>
   </div>
