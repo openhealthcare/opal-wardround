@@ -89,7 +89,7 @@ class WardRound(BaseWardRound):
     name        = 'PLEASE NAME ME Larry!'
     description = 'PLEASE DESCRIBE ME Larry!'
 
-    detail_template = 'detail/default.html'
+    detail_template = 'detail/wardround_default.html'
     filter_template = None
     filters         = {}
 
