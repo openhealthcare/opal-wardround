@@ -4,7 +4,7 @@
     <select class="form-control" ng-model="filters.team">
       <option value="">---------</option>
       {% for team in teams %}
-      <option value="{{ team.name }}">{{ team.title }}</option>
+      <option value="{{ team.name }}">{% if team.parent %}{{ team.parent.title }} / {% endif %}{{ team.title }}</option>
       {% endfor %}
     </select>
   </div>
