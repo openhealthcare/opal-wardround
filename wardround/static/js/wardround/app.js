@@ -1,5 +1,5 @@
 //
-// Main OPAL Ward round pkugin application!
+// Main OPAL Ward round plugin application!
 //
 var services = OPAL.module('opal.wardround.services', []);
 
