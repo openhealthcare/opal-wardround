@@ -22,9 +22,10 @@ settings.configure(DEBUG=True,
                                    'wardround',))
 
 from wardround.tests import dummy_options_module
+from wardround.tests import dummy_opal_application
 
-from django.test.simple import DjangoTestSuiteRunner
-test_runner = DjangoTestSuiteRunner(verbosity=1)
+from django.test.runner import DiscoverRunner
+test_runner = DiscoverRunner(verbosity=1)
 failures = test_runner.run_tests(['wardround', ])
 if failures:
     sys.exit(failures)
