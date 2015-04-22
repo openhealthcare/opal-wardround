@@ -4,7 +4,7 @@ Views for the OPAL Wardrounds plugin
 from django.views.generic import View, TemplateView
 
 from opal.core.views import LoginRequiredMixin, _build_json_response
-from opal.utils.models import subrecords
+from opal.core.subrecords import subrecords
 
 class WardRoundIndexView(LoginRequiredMixin, TemplateView):
     """
