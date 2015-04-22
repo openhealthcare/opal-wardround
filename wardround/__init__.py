@@ -3,7 +3,8 @@ Plugin definition
 """
 from django.conf import settings
 
-from opal.utils import OpalPlugin, camelcase_to_underscore, stringport
+from opal.core.plugins import OpalPlugin
+from opal.utils import camelcase_to_underscore, stringport
 
 from wardround.urls import urlpatterns
 
