@@ -21,8 +21,12 @@ settings.configure(DEBUG=True,
                                    'opal',
                                    'wardround',))
 
+from opal.core import application
+class Application(application.OpalApplication):
+    pass
+
+
 from wardround.tests import dummy_options_module
-from wardround.tests import dummy_opal_application
 
 from django.test.runner import DiscoverRunner
 test_runner = DiscoverRunner(verbosity=1)
