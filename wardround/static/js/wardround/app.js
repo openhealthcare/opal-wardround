@@ -1,6 +1,7 @@
 //
 // Main OPAL Ward round plugin application!
 //
+var opal = OPAL.module('opal');
 var services = OPAL.module('opal.wardround.services', []);
 
 var controllers = OPAL.module('opal.wardround.controllers', [
@@ -39,7 +40,6 @@ app.config(function($routeProvider){
         .when('/:wardround/:episode_id', {
             controller: 'WardRoundDetailCtrl',
             resolve: {
-		schema: function(detailSchemaLoader) { return detailSchemaLoader; },
                 ward_round: function(wardRoundLoader){ return wardRoundLoader() },
 		options: function(Options) { return Options; },
                 profile: function(UserProfile){ return UserProfile }

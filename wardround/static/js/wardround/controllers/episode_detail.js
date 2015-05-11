@@ -5,7 +5,6 @@ angular.module('opal.wardround.controllers').controller(
    'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
                                    $cookieStore, $modal,
                                    EpisodeDetailMixin, Flow,
-                                   schema,
                                    ward_round, options, profile){
 
        $scope.filters = $cookieStore.get('wardround_filters') || [];
@@ -19,7 +18,6 @@ angular.module('opal.wardround.controllers').controller(
        
        $scope.options = options;
        $scope.profile = profile;
-       $scope.schema = schema;
        $scope.Flow = Flow;
 
        EpisodeDetailMixin($scope);
