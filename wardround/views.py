@@ -24,7 +24,7 @@ class WardRoundEpisodesView(LoginRequiredMixin, View):
 
         wardround = WardRound.get(kwargs['name'])
         episodes = wardround.episodes()
-        episodes = [e.to_dict(self.request.user) for e in episodes]
+        episodes = [e.to_dict(self.request.user, shallow=False) for e in episodes]
         return _build_json_response(episodes)
 
 
