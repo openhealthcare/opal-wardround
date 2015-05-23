@@ -41,6 +41,7 @@ class WardRoundsPlugin(OpalPlugin):
             'js/wardround/controllers/list.js',
             'js/wardround/controllers/wardround.js',
             'js/wardround/controllers/episode_detail.js',
+            'js/wardround/controllers/find_patient.js',
         ]
     }
     menuitems = [
