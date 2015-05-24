@@ -3,7 +3,7 @@ Plugin definition
 """
 from django.conf import settings
 
-from opal.core.plugins import OpalPlugin
+from opal.core import plugins
 from opal.utils import camelcase_to_underscore, stringport
 
 from wardround.urls import urlpatterns
@@ -28,7 +28,7 @@ def import_from_apps():
     return
 
     
-class WardRoundsPlugin(OpalPlugin):
+class WardRoundsPlugin(plugins.OpalPlugin):
     """
     Main entrypoint to expose this plugin to the host
     OPAL instance !
@@ -50,6 +50,8 @@ class WardRoundsPlugin(OpalPlugin):
             activepattern='/wardround')
     ]
 
+
+plugins.register(WardRoundsPlugin)    
 
 class BaseWardRound(object):
     """
