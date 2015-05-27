@@ -116,7 +116,8 @@ class WardRound(BaseWardRound):
 
         return dict(name=klass.name, 
                     description=klass.description,
-                    episodes=Episode.objects.serialised(user, klass.episodes()),
+                    episodes=Episode.objects.serialised(user, klass.episodes(),
+                                                        episode_history=True),
                     filters=klass.filters)
 
 
