@@ -12,8 +12,7 @@ class TeamFilterTestCase(TestCase):
         baz = Team(name='baz')
         caz = Team(name='caz')
         context = MagicMock()
-        context['request'].user.get_profile(
-        ).get_teams.return_value = [wat, bar, caz, baz]
+        context['request'].user.profile.get_teams.return_value = [wat, bar, caz, baz]
         teams = team_filter(context)
         expected = ['bar', 'baz', 'caz', 'wat']
         self.assertEqual([t.name for t in teams['teams']], expected)
