@@ -32,7 +32,9 @@ angular.module('opal.wardround.controllers').controller(
             })
         };
 
-        $scope.$watch('filter.query', function(){ $scope.results = $scope.get_filtered_episodes() } );
+        $scope.$watch('filter.query', function(){ 
+            $scope.results = $scope.get_filtered_episodes() 
+        });
         
         $scope.cancel = function() {
             $modalInstance.close(null);
