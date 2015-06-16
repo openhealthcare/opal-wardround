@@ -28,6 +28,9 @@ class Application(application.OpalApplication):
 
 from wardround.tests import dummy_options_module
 
+import django
+django.setup()
+
 from django.test.runner import DiscoverRunner
 test_runner = DiscoverRunner(verbosity=1)
 failures = test_runner.run_tests(['wardround', ])
