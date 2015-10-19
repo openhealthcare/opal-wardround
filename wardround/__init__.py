@@ -15,7 +15,7 @@ def import_from_apps():
     """
     Iterate through installed apps attempting to import app.wardrounds
     This way we allow our implementation, or plugins, to define their
-    own ward rounds. 
+    own ward rounds.
     """
     print "Importing from apps"
     for app in settings.INSTALLED_APPS:
@@ -27,7 +27,7 @@ def import_from_apps():
     IMPORTED_FROM_APPS = True
     return
 
-    
+
 class WardRoundsPlugin(plugins.OpalPlugin):
     """
     Main entrypoint to expose this plugin to the host
@@ -46,12 +46,12 @@ class WardRoundsPlugin(plugins.OpalPlugin):
     }
     menuitems = [
         dict(
-            href="/wardround/", display="Ward Rounds", icon="fa fa-tasks",
+            href="/wardround/#/", display="Ward Rounds", icon="fa fa-tasks",
             activepattern='/wardround')
     ]
 
 
-plugins.register(WardRoundsPlugin)    
+plugins.register(WardRoundsPlugin)
 
 class BaseWardRound(object):
     """
@@ -59,7 +59,7 @@ class BaseWardRound(object):
     """
     name        = None
     description = None
-    
+
     @classmethod
     def get(klass, name):
         """
@@ -67,11 +67,11 @@ class BaseWardRound(object):
         """
         if not IMPORTED_FROM_APPS:
             import_from_apps()
-            
+
         for sub in klass.__subclasses__():
             if sub.slug() == name:
                 return sub
-            
+
     @classmethod
     def list(klass):
         """
@@ -84,7 +84,7 @@ class BaseWardRound(object):
     @classmethod
     def slug(klass):
         return camelcase_to_underscore(klass.name).replace(' ', '')
-     
+
 
 class WardRound(BaseWardRound):
     """
@@ -114,10 +114,8 @@ class WardRound(BaseWardRound):
         """
         from opal.models import Episode
 
-        return dict(name=klass.name, 
+        return dict(name=klass.name,
                     description=klass.description,
                     episodes=Episode.objects.serialised(user, klass.episodes(),
                                                         episode_history=True),
                     filters=klass.filters)
-
-
