@@ -31,7 +31,8 @@ app.config(function($routeProvider){
         .when('/:wardround', {
             controller: 'WardRoundCtrl',
             resolve: {
-                ward_round: function(wardRoundLoader){ return wardRoundLoader() } 
+                ward_round: function(wardRoundLoader){ return wardRoundLoader(); },
+            		options: function(Options) { return Options; },
             },
             templateUrl: function(params){
                 return '/wardround/templates/' + params.wardround + '/detail.html';
@@ -41,7 +42,7 @@ app.config(function($routeProvider){
             controller: 'WardRoundDetailCtrl',
             resolve: {
                 ward_round: function(wardRoundLoader){ return wardRoundLoader() },
-		options: function(Options) { return Options; },
+            		options: function(Options) { return Options; },
                 profile: function(UserProfile){ return UserProfile }
 
             },

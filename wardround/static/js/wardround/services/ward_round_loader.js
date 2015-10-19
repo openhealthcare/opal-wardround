@@ -1,8 +1,8 @@
 angular.module('opal.wardround.services')
     .factory('wardRoundLoader', function($q, $route, $http, recordLoader, Episode) {
         return function() {
-	    var deferred = $q.defer();
-            recordLoader.then(function(records){
+    	    var deferred = $q.defer();
+          recordLoader.then(function(records){
 	        $http.get('/wardround/'+$route.current.params.wardround).then(
                     function(resource) {
                         var wardround = resource.data;
