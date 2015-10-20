@@ -3,14 +3,13 @@
 //
 angular.module('opal.wardround.controllers').controller(
     'WardRoundCtrl', function($rootScope, $scope, $routeParams, $location,
-                              $cookieStore,
+                              $cookieStore, $location,
                               ward_round, options){
         $scope.ward_round = ward_round;
         $scope.episodes = ward_round.episodes;
         $scope.results = ward_round.episodes;
         $scope.limit = 10;
-        $scope.filters = {};
-
+        $scope.filters = $location.search();
 
         // Put all of our lookuplists in scope.
   	    for (var name in options) {
