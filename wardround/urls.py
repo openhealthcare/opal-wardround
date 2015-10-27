@@ -7,7 +7,7 @@ from wardround import views
 
 urlpatterns = patterns(
     '',
-    url('^wardround/$', views.WardRoundIndexView.as_view()),
+    url('^wardround/$', views.WardRoundIndexView.as_view(), name="wardround_index"),
     url('^wardround/(?P<name>[a-z_]+)$', views.WardRoundView.as_view()),
     url(r'^wardround/templates/episode_detail.html$',
         views.WardRoundEpisodeDetailTemplateView.as_view()),

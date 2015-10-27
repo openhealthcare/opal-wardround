@@ -1,4 +1,4 @@
-// 
+//
 // Editing/detail page for ward round episodes
 //
 angular.module('opal.wardround.controllers').controller(
@@ -8,14 +8,12 @@ angular.module('opal.wardround.controllers').controller(
                                    ward_round, options, profile){
 
        $scope.filters = $cookieStore.get('wardround_filters') || [];
-       console.log($scope.filters);
-       
        $scope.ward_round = ward_round;
        $scope.episodes = ward_round.episodes;
        $scope.limit = ward_round.episodes.length;
        $scope.episode_id = $routeParams.episode_id;
        $scope.episode = _.findWhere($scope.ward_round.episodes, {id: parseInt($scope.episode_id)});
-       
+
        $scope.options = options;
        $scope.profile = profile;
        $scope.Flow = Flow;
@@ -41,7 +39,7 @@ angular.module('opal.wardround.controllers').controller(
        $scope.set_visible_episodes();
        $scope.total_episodes = $scope.results.length;
        $scope.this_episode_number = _.indexOf(_.pluck($scope.results, 'id'), parseInt($scope.episode_id));
-       
+
        $scope.jumpToEpisode = function(e){
            $location.path($routeParams.wardround + '/' + e.id);
        };

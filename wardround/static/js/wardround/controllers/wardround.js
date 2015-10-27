@@ -1,16 +1,22 @@
 //
-// Start page for our ward round ! 
+// Start page for our ward round !
 //
 angular.module('opal.wardround.controllers').controller(
     'WardRoundCtrl', function($rootScope, $scope, $routeParams, $location,
-                              $cookieStore,
-                              ward_round){
+                              $cookieStore, $location,
+                              ward_round, options){
         $scope.ward_round = ward_round;
         $scope.episodes = ward_round.episodes;
         $scope.results = ward_round.episodes;
         $scope.limit = 10;
-        $scope.filters = {};
+        $scope.filters = $location.search();
 
+        // Put all of our lookuplists in scope.
+  	    for (var name in options) {
+  		    if (name.indexOf('micro_test') != 0) {
+  			    $scope[name + '_list'] = options[name];
+  		    };
+  	    };
 
         $scope.jumpToEpisode = function(episode){
             $location.path($routeParams.wardround + '/' + episode.id);
@@ -34,7 +40,7 @@ angular.module('opal.wardround.controllers').controller(
         $scope.$watch('filters', function(){
             $scope.set_visible_episodes();
         }, true);
-        
+
         $scope.start = function(){
             $cookieStore.put('wardround_filters', $scope.filters);
             $location.path($routeParams.wardround + '/' + $scope.results[0].id);
