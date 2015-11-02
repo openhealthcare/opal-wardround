@@ -22,32 +22,39 @@ var app = OPAL.module('opal.wardround', [
 OPAL.run(app);
 
 app.config(function($routeProvider){
+
+    var episodeListView = {
+        controller: 'WardRoundCtrl',
+        resolve: {
+            ward_round: function(WardRoundLoader){ return WardRoundLoader(); },
+            options: function(Options) { return Options; },
+        },
+        templateUrl: function(params){
+            return '/wardround/templates/' + params.wardround + '/detail.html';
+        }
+    };
+
+    var episodeDetailView = {
+        controller: 'WardRoundDetailCtrl',
+        resolve: {
+            ward_round_episode_loader: function(WardRoundEpisodesLoader){
+                return WardRoundEpisodesLoader();
+            },
+            options: function(Options) { return Options; },
+            profile: function(UserProfile){ return UserProfile; }
+
+        },
+        templateUrl: function(params){
+            return '/wardround/templates/' + params.wardround + '/episode_detail.html';
+        }
+    };
+
     $routeProvider.when('/', {redirectTo: '/list'})
         .when('/list', {
             controller: 'WardRoundListCtrl',
             resolve: {},
             templateUrl: '/wardround/templates/list.html'
         })
-        .when('/:wardround', {
-            controller: 'WardRoundCtrl',
-            resolve: {
-                ward_round: function(wardRoundLoader){ return wardRoundLoader(); },
-            		options: function(Options) { return Options; },
-            },
-            templateUrl: function(params){
-                return '/wardround/templates/' + params.wardround + '/detail.html';
-            }
-        })
-        .when('/:wardround/:episode_id', {
-            controller: 'WardRoundDetailCtrl',
-            resolve: {
-                ward_round: function(wardRoundLoader){ return wardRoundLoader() },
-            		options: function(Options) { return Options; },
-                profile: function(UserProfile){ return UserProfile }
-
-            },
-            templateUrl: function(params){
-                return '/wardround/templates/' + params.wardround + '/episode_detail.html'
-            }
-        })
-})
+        .when('/:wardround/:filter_arg?', episodeListView)
+        .when('/:wardround/:filter_arg?/episode/:index?', episodeDetailView)
+});
