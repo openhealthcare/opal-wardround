@@ -47,7 +47,7 @@ class WardRoundsPlugin(plugins.OpalPlugin):
     menuitems = [
         dict(
             href="/wardround/#/", display="Ward Rounds", icon="fa fa-tasks",
-            activepattern='/wardround')
+            activepattern='/wardround', index=1)
     ]
 
 
