@@ -1,7 +1,7 @@
 module.exports = function(config){
     config.set({
         frameworks: ['jasmine'],
-        browsers: ['Firefox'],
+        browsers: ['PhantomJS'],
         basePath:  '/usr/lib/ohc/opal/opal/static/js',
 
         files: [
@@ -26,6 +26,8 @@ module.exports = function(config){
             'angular-strap-2.0.3/modules/timepicker.tpl.js',
             'angular-strap-2.0.3/modules/typeahead.js',
             'angular-strap-2.0.3/modules/typeahead.tpl.js',
+            "angulartics-0.17.2/angulartics.min.js",
+            "angulartics-0.17.2/angulartics-ga.min.js",
             'ngprogress-lite/ngprogress-lite.js',
             'jquery-1.11.0/jquery.js',
             'utils/underscore.js',
@@ -47,7 +49,7 @@ module.exports = function(config){
             '../../../../opal-wardround/wardround/static/js/wardround/*.js',
             '../../../../opal-wardround/wardround/static/js/wardround/controllers/*.js',
             '../../../../opal-wardround/wardround/static/js/test/*.js',
-            
+
             // 'opaltest/*.js',
             // '../../../../elcid/elcid/assets/js/elcidtest/*.js',
         ],

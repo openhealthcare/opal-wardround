@@ -1,17 +1,19 @@
 describe('WardRoundFindPatientCtrl', function (){
-    var $scope, $httpBackend, $modal, $modalInstance;
-    var Episode;
-    var episodes;
+    "use strict";
+
+    var $scope, $httpBackend, $modalInstance;
+    var Episode, $rootScope, episodes, controller;
+    var demographics1, demographics2;
 
     beforeEach(module('opal.wardround.controllers'));
 
     beforeEach(inject(function($injector){
-        $rootScope   = $injector.get('$rootScope');
+        var $rootScope   = $injector.get('$rootScope');
+        var $controller  = $injector.get('$controller');
+        var $modal       = $injector.get('$modal');
         $scope       = $rootScope.$new();
-        $controller  = $injector.get('$controller');
         Episode      = $injector.get('Episode');
         $httpBackend = $injector.get('$httpBackend');
-        $modal       = $injector.get('$modal');
 
         $modalInstance = $modal.open({template: 'Not a real template'});
         demographics1 = {name: 'Amy Andrews', hospital_number: '1111'};
@@ -20,7 +22,7 @@ describe('WardRoundFindPatientCtrl', function (){
             new Episode({demographics: [demographics1]}),
             new Episode({demographics: [demographics2]}),
         ];
-        
+
         controller = $controller('WardRoundFindPatientCtrl', {
             $scope        : $scope,
             $modalInstance: $modalInstance,
@@ -39,7 +41,7 @@ describe('WardRoundFindPatientCtrl', function (){
             expect($scope.filter.query).toBe("");
             expect($scope.get_filtered_episodes()).toEqual($scope.episodes);
         });
-        
+
         it('Should filter on hospital number', function () {
             $scope.filter.query = '1111';
             expect($scope.get_filtered_episodes()).toEqual([$scope.episodes[0]]);
@@ -59,7 +61,7 @@ describe('WardRoundFindPatientCtrl', function (){
             $scope.episodes.push(new Episode({}));
             expect($scope.get_filtered_episodes()).toEqual([$scope.episodes[0],
                                                            $scope.episodes[1]]);
-        });        
+        });
     });
-    
+
 });
