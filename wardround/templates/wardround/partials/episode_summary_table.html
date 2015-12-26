@@ -1,0 +1,27 @@
+<table class="table table-bordered table-striped table-hover search" ng-show="wardround.episodes.length > 0">
+  <thead>
+    <tr>
+      <td ng-repeat="field in wardround.fields">
+        [[ field ]]
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+	<tr ng-repeat="episodeRow in episodes | limitTo: limit" ng-class="{success: episode.id === episodeRow.id}">
+    <td style="position: relative;" ng-repeat="field in wardround.fields">
+      <span ng-if="episode.id !== episodeRow.id">
+        <a class="table-link" href="[[ episodeRow.link ]]">
+          [[ episodeRow[field] ]]
+        </a>
+      </span>
+      <span ng-if="episode.id === episodeRow.id">
+        <a class="table-link" ng-click="cancel()">
+          [[ episodeRow[field] ]]
+        </a>
+      </span>
+
+    </td>
+	</tr>
+  </tbody>
+
+</table>

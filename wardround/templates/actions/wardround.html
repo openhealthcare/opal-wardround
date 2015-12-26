@@ -9,30 +9,23 @@
   <ul class="list-group">
     <li class="list-group-item">
       <p>
-        Patient [[ this_episode_number + 1 ]] of [[ total_episodes ]]
+        Patient [[ episodeNumber + 1 ]] of [[ totalEpisodes ]]
         <br />
-        <button class="btn btn-secondary btn-sm"
-                ng-click="open_modal('WardRoundFindPatientCtrl', '/templates/wardround/find_patient.html', 'md', {episodes: results})">
+        <button class="btn btn-secondary btn-sm" ng-click="findPatient()">
           {% icon 'fa-search' %}
           Find Patient
         </button>
       </p>
     </li>
     <li class="list-group-item">
-        <button type="button" class="btn btn-lg btn-sm btn-secondary pull-left"
-                ng-hide="this_episode_number == 0"                
-                ng-click="previous()"
-                >
-          <i class="fa fa-chevron-left"></i>
-          Previous
-        </button>
-        <button type="button" class="btn btn-lg btn-secondary btn-sm pull-right"
-                ng-hide="this_episode_number+ 1 == total_episodes"
-                ng-click="next()"
-                >
-          <i class="fa fa-chevron-right"></i>                    
-          Next
-        </button>      
+      <a ng-show="previous" class="btn btn-secondary btn-sm pull-left" href="[[ previous ]]">
+        Previous
+        <i class="fa fa-chevron-left"></i>
+      </a>
+      <a ng-show="next" class="btn btn-secondary btn-sm pull-right" href="[[ next ]]">
+        Next
+        <i class="fa fa-chevron-right"></i>
+      </a>
     </li>
   </ul>
-</div>  
+</div>
