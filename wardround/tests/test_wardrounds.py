@@ -60,6 +60,7 @@ class WardroundTest(OpalTestCase):
             'columns': [
                 'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged'
             ],
+            'auto_start': True,
             'description': 'test wardround',
             'episodes': [
                 {
@@ -95,6 +96,7 @@ class WardroundTest(OpalTestCase):
                 'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged', 'Gender'
             ],
             'description': 'test wardround',
+            'auto_start': True,
             'episodes': [
                 {
                     'Admitted': None,
