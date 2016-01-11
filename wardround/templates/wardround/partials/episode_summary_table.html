@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-	<tr ng-repeat="episodeRow in episodes | limitTo: limit" ng-class="{success: episode.id === episodeRow.id}">
+	<tr ng-repeat="episodeRow in episodes" ng-class="{success: episode.id === episodeRow.id}">
     <td style="position: relative;" ng-repeat="field in wardround.fields">
       <span ng-if="episode.id !== episodeRow.id">
         <a class="table-link" href="[[ episodeRow.link ]]">

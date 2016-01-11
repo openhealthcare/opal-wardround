@@ -40,12 +40,15 @@ class WardRound(BaseWardRound):
     """
     name = 'PLEASE NAME ME Larry!'
     description = 'PLEASE DESCRIBE ME Larry!'
-
     detail_template = 'detail/wardround_default.html'
     filter_template = None
 
     def __init__(self, request):
         self.request = request
+
+    @property
+    def auto_start(self):
+        return not bool(self.filter_template)
 
     @property
     def list_columns(self):
@@ -91,12 +94,12 @@ class WardRound(BaseWardRound):
                     description=self.description,
                     episodes=episodes,
                     fields=field_dict.values(),
-                    columns=columns
+                    columns=columns,
+                    auto_start=self.auto_start
                     )
 
     def list_view_table(self):
         episodes = self.episodes()
-        print "list view table"
         return self.serialize(episodes, self.list_columns)
 
     def find_patient_table(self, episode_ids):

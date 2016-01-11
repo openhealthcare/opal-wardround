@@ -7,7 +7,6 @@ angular.module('opal.wardround.controllers').controller(
         wardround, episode
     ){
         $scope.wardround = wardround;
-        $scope.limit = 10;
         $scope.filter = {
             query: ""
         };

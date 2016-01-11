@@ -6,9 +6,9 @@ angular.module('opal.wardround.controllers').controller(
     $cookieStore, wardround, options, localStorageService, WardRoundUtils){
 
       "use strict";
+      $scope.ready = false;
 
       $scope.wardround = wardround;
-      $scope.limit = 10;
       $scope.filters = $location.search();
       $scope.episodes = wardround.episodes;
 
@@ -22,6 +22,14 @@ angular.module('opal.wardround.controllers').controller(
       $scope.$watch('filters', function() {
         $location.search($scope.filters);
       }, true);
+
+      if(wardround.auto_start){
+        $location.path($routeParams.wardround + '/' + $scope.wardround.episodes[0].id);
+        $location.replace();
+      }
+      else{
+        $scope.ready = true;
+      }
 
       $scope.start = function(){
         $location.path($routeParams.wardround + '/' + $scope.wardround.episodes[0].id);

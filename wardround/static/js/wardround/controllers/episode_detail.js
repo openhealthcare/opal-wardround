@@ -4,13 +4,14 @@
 angular.module('opal.wardround.controllers').controller(
   'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
     $cookieStore, $modal, episode, episodeIds, $modalStack,
-    EpisodeDetailMixin, Flow, options, profile, localStorageService){
+    EpisodeDetailMixin, Flow, options, profile, WardRoundUtils){
       "use strict";
 
       if(!_.contains(episodeIds, episode.id)){
           $location.url("/" + $routeParams.wardround);
           $location.replace();
       }
+      var wardRoundUtils = new WardRoundUtils($routeParams.wardround, $location.search());
       $modalStack.dismissAll();
       var wardRoundName = $routeParams.wardround;
       $scope.episode = episode;
@@ -21,10 +22,6 @@ angular.module('opal.wardround.controllers').controller(
       $scope.wardRoundOrderCollapsed = true;
       $scope.episodeNumber = _.indexOf(episodeIds, $scope.episode.id);
       $scope.totalEpisodes = episodeIds.length;
-
-      $scope.getEpisodeLink = function(episodeId){
-          return '#/' + $routeParams.wardround + '/' + episodeId;
-      };
 
       $scope.findPatient = function(){
         $rootScope.state = 'modal';
@@ -52,13 +49,13 @@ angular.module('opal.wardround.controllers').controller(
       $scope.next = false;
 
       if($scope.episodeNumber + 1 !== $scope.totalEpisodes){
-          $scope.next = $scope.getEpisodeLink(episodeIds[$scope.episodeNumber + 1]);
+          $scope.next = wardRoundUtils.getEpisodeLink(episodeIds[$scope.episodeNumber + 1]);
       }
 
       $scope.previous = false;
 
       if($scope.episodeNumber !== 0){
-          $scope.previous = $scope.getEpisodeLink(episodeIds[$scope.episodeNumber - 1]);
+          $scope.previous = wardRoundUtils.getEpisodeLink(episodeIds[$scope.episodeNumber - 1]);
       }
     }
   );
