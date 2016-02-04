@@ -1,44 +1,47 @@
-// 
-// Ward round filter / find patient modal 
+//
+// Ward round filter / find patient modal
 //
 angular.module('opal.wardround.controllers').controller(
     'WardRoundFindPatientCtrl', function(
         $scope, $modalInstance, $routeParams, $location,
-        episodes
+        wardround, episode
     ){
-        $scope.limit = 20;
-        $scope.episodes = episodes;
-        $scope.results = episodes;
+        $scope.wardround = wardround;
         $scope.filter = {
             query: ""
         };
 
-        $scope.jumpToEpisode = function(episode){
-            $location.path($routeParams.wardround + '/' + episode.id);
-            $modalInstance.close();
-        };
+        $scope.episode = episode;
 
-        $scope.get_filtered_episodes = function(){
-            return _.filter($scope.episodes, function(e){
-                // This shouldn't happen, but it's been seen in the wild!
-                if(!e.demographics){ return false }
-                var demographics = e.demographics[0];
-                var query = $scope.filter.query.toLowerCase()
-                if(
-                    demographics.name.toLowerCase().indexOf(query) != -1 || 
-                        demographics.hospital_number.toLowerCase().indexOf(query) != -1 
-                  ){return true}
-                return false
-            })
-        };
+        $scope.$watch('filter.query', function() {
+            if($scope.filter.query.length){
+              var query = $scope.filter.query.toLowerCase();
+              $scope.episodes = _.filter($scope.wardround.episodes, function(e){
+                  // filter all rows that have string values
+                  var found = false;
+                  _.each(e, function(value, key){
+                     // don't query by the link
+                     if (key === "link") {
+                       return;
+                     }
+                     if(_.isString(value)){
+                       if(value.toLowerCase().indexOf(query.toLowerCase()) !== -1){
+                          found = true;
+                       }
+                     }
+                  });
 
-        $scope.$watch('filter.query', function(){ 
-            $scope.results = $scope.get_filtered_episodes() 
-        });
-        
+                  return found;
+              });
+            }
+            else{
+              $scope.episodes = $scope.wardround.episodes;
+            }
+
+        }, true);
+
         $scope.cancel = function() {
             $modalInstance.close(null);
         };
-
     }
 );
