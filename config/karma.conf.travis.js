@@ -57,6 +57,7 @@ module.exports = function(config){
             // '../../../../elcid/elcid/assets/js/elcid/*.js',
             __dirname+'/../wardround/static/js/wardround/*.js',
             __dirname+'/../wardround/static/js/wardround/controllers/*.js',
+            __dirname+'/../wardround/static/js/wardround/services/*.js',
             __dirname+'/../wardround/static/js/test/*.js',
 
             // 'opaltest/*.js',
