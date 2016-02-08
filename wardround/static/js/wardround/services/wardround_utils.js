@@ -2,14 +2,23 @@ angular.module('opal.wardround.services')
 .factory('WardRoundUtils', function($q, $location, $http, localStorageService) {
   "use strict";
 
-  var WardRoundUtils = function(wardroundName, getParams){
+  var WardRoundDetail = function(slug, episodeIds, name, getParams){
+    // this is the object that we store in local storage
+    this.episodeIds = episodeIds;
+    this.lastSet = moment().format();
+    this.wardroundSlug = slug;
+    this.name = name;
+    this.getParams = getParams;
+  };
+
+  var WardRoundUtils = function(wardroundSlug, getParams){
     var self = this;
-    self.wardroundName = wardroundName;
+    self.wardroundSlug = wardroundSlug;
     self.getParams = getParams;
 
     this.isCacheStale = function(someCache){
-      return !(this.wardroundName === someCache.wardroundName &&
-             _.isEqual(someCache.params, this.getParams) &&
+      return !(this.wardroundSlug === someCache.wardroundSlug &&
+             _.isEqual(someCache.getParams, this.getParams) &&
              moment(someCache.lastSet).isAfter(moment().subtract(1, "h")));
     };
 
@@ -22,7 +31,7 @@ angular.module('opal.wardround.services')
     };
 
     this.getEpisodeLink = function(episodeId){
-      var link = '/wardround/#/' + this.wardroundName + '/' + episodeId;
+      var link = '/wardround/#/' + this.wardroundSlug + '/' + episodeId;
       if(_.size(getParams)){
         link = link + "?" + $.param(this.getParams);
       }
@@ -30,21 +39,17 @@ angular.module('opal.wardround.services')
       return link;
     };
 
-    this.setLocalStorage = function(episodeIds){
-      if(localStorageService.isSupported){
-        var saveObject = {
-          episodeIds: episodeIds,
-          lastSet: moment().format(),
-          wardroundName: this.wardroundName,
-          params: this.getParams,
-        };
-        localStorageService.set("wardround", saveObject);
-      }
+    this.setLocalStorage = function(wardroundDetail){
+      localStorageService.set("wardround", wardroundDetail);
     };
+
+    this.cleanLocalStorage = function(){
+      localStorageService.remove("wardround");
+    }
 
     this.loadWardRound = function(){
       var deferred = $q.defer();
-      var getUrl = '/wardround/' + self.wardroundName;
+      var getUrl = '/wardround/' + self.wardroundSlug;
 
       $http.get(getUrl, {params: self.getParams}).then(
         function(resource) {
@@ -59,30 +64,37 @@ angular.module('opal.wardround.services')
       return deferred.promise;
     };
 
-    this.getEpisodeIdsFromCache = function(){
+    this.wardroundDetailFromCache = function(){
         if(!localStorageService.isSupported){
           return;
         }
         var cache = localStorageService.get("wardround");
         if(cache && !self.isCacheStale(cache)){
-          var episodeIds = cache.episodeIds;
-          self.setLocalStorage(episodeIds);
-          return episodeIds;
+          self.setLocalStorage(cache);
+          return cache;
         }
     };
 
-    this.getEpisodesIds = function(){
+    this.getWardroundDetail = function(){
       var deferred = $q.defer();
-      var episodeIdsFromCache = self.getEpisodeIdsFromCache();
+      var wardroundDetail = self.wardroundDetailFromCache();
 
-      if(episodeIdsFromCache){
-          deferred.resolve(episodeIdsFromCache);
+      if(wardroundDetail){
+          deferred.resolve(wardroundDetail);
       }
       else{
         this.loadWardRound().then(function(wardround){
           var episodeIds = _.pluck(wardround.episodes, "id");
-          self.setLocalStorage(episodeIds);
-          deferred.resolve(episodeIds);
+          var wardroundDetail = new WardRoundDetail(
+            self.wardroundSlug,
+            episodeIds,
+            wardround.name,
+            self.getParams
+          );
+          if(localStorageService.isSupported){
+            self.setLocalStorage(wardroundDetail);
+          }
+          deferred.resolve(wardroundDetail);
         });
       }
 
@@ -91,11 +103,11 @@ angular.module('opal.wardround.services')
 
     this.getSummariesFromIds = function(){
       var deferred = $q.defer();
-      var episodeIdPromise = this.getEpisodesIds();
-      episodeIdPromise.then(function(episodeIds){
-        var getUrl = '/wardround/'+ self.wardroundName;
+      var episodeIdPromise = this.getWardroundDetail();
+      episodeIdPromise.then(function(wardroundDetail){
+        var getUrl = '/wardround/'+ wardroundDetail.wardroundSlug;
         getUrl = getUrl + "/find_patient";
-        $http.get(getUrl, {params: {episode_id: episodeIds}}).then(
+        $http.get(getUrl, {params: {episode_id: wardroundDetail.episodeIds}}).then(
           function(resource) {
             var wardround = self.castWardRounds(resource.data);
             deferred.resolve(wardround);

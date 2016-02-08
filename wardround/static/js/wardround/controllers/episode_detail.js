@@ -3,25 +3,29 @@
 //
 angular.module('opal.wardround.controllers').controller(
   'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
-    $cookieStore, $modal, episode, episodeIds, $modalStack,
+    $cookieStore, $modal, episode, wardroundDetail, $modalStack,
     EpisodeDetailMixin, Flow, options, profile, WardRoundUtils){
       "use strict";
 
-      if(!_.contains(episodeIds, episode.id)){
+      if(!_.contains(wardroundDetail.episodeIds, episode.id)){
           $location.url("/" + $routeParams.wardround);
           $location.replace();
       }
       var wardRoundUtils = new WardRoundUtils($routeParams.wardround, $location.search());
+
       $modalStack.dismissAll();
-      var wardRoundName = $routeParams.wardround;
       $scope.episode = episode;
+
+      // this is currently used by some of the actions to figure out if we're in
+      // a wardround. Its also used to add the title
+      $scope.ward_round = wardroundDetail;
       $scope.options = options;
       $scope.profile = profile;
       $scope.Flow = Flow;
       EpisodeDetailMixin($scope);
       $scope.wardRoundOrderCollapsed = true;
-      $scope.episodeNumber = _.indexOf(episodeIds, $scope.episode.id);
-      $scope.totalEpisodes = episodeIds.length;
+      $scope.episodeNumber = _.indexOf(wardroundDetail.episodeIds, $scope.episode.id);
+      $scope.totalEpisodes = wardroundDetail.episodeIds.length;
 
       $scope.findPatient = function(){
         $rootScope.state = 'modal';
@@ -49,13 +53,13 @@ angular.module('opal.wardround.controllers').controller(
       $scope.next = false;
 
       if($scope.episodeNumber + 1 !== $scope.totalEpisodes){
-          $scope.next = wardRoundUtils.getEpisodeLink(episodeIds[$scope.episodeNumber + 1]);
+          $scope.next = wardRoundUtils.getEpisodeLink(wardroundDetail.episodeIds[$scope.episodeNumber + 1]);
       }
 
       $scope.previous = false;
 
       if($scope.episodeNumber !== 0){
-          $scope.previous = wardRoundUtils.getEpisodeLink(episodeIds[$scope.episodeNumber - 1]);
+          $scope.previous = wardRoundUtils.getEpisodeLink(wardroundDetail.episodeIds[$scope.episodeNumber - 1]);
       }
     }
   );
