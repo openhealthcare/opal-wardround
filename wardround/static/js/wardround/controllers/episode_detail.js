@@ -61,18 +61,5 @@ angular.module('opal.wardround.controllers').controller(
       if($scope.episodeNumber !== 0){
           $scope.previous = wardRoundUtils.getEpisodeLink(wardroundDetail.episodeIds[$scope.episodeNumber - 1]);
       }
-
-      $scope.named_controller = function(template, controller){
-          $modal.open({
-              templateUrl: template,
-              controller: controller,
-              resolve: {
-                  episode: function(){ return $scope.episode; },
-                  tags: function(){ return {};  },
-                  schema: function(){ return {}; },
-                  options: function(){ return options; }
-              }
-          });
-      };
     }
   );
