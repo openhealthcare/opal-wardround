@@ -10,10 +10,11 @@ describe('WardRoundUtils', function (){
         localStorageService = $injector.get('localStorageService');
         wardroundUtils = new WardRoundUtils("testWardround", {consultant: "someone"});
         fakeWardroundCacheObject = {
-            wardround: "testWardround",
+            wardroundSlug: "testWardround",
             lastSet: moment().format(),
-            params: {consultant: "someone"},
-            episodeIds: [1]
+            getParams: {consultant: "someone"},
+            episodeIds: [1],
+            name: "testWardroundName"
         };
     }));
 
@@ -48,15 +49,16 @@ describe('WardRoundUtils', function (){
       beforeEach(inject(function ($injector) {
         $httpBackend.expectGET('/wardround/testWardround?consultant=someone').respond({
           episodes: [{id: 1}],
+          name: "testWardroundName"
         });
 
         spyOn(localStorageService, "set");
       }));
 
       afterEach(function(){
-        var episodeIdsPromise = wardroundUtils.getEpisodesIds();
+        var episodeIdsPromise = wardroundUtils.getWardroundDetail();
         episodeIdsPromise.then(function(r){
-          expect(r).toEqual([1]);
+          expect(r.episodeIds).toEqual([1]);
         });
         $httpBackend.flush();
         expect(localStorageService.get).toHaveBeenCalled();
@@ -67,8 +69,9 @@ describe('WardRoundUtils', function (){
         expect(callArgs[0][0]).toEqual("wardround");
 
         // we expect
-        expect(callArgs[0][1].wardround).toEqual("testWardround");
-        expect(callArgs[0][1].params).toEqual({consultant: "someone"});
+        expect(callArgs[0][1].wardroundSlug).toEqual("testWardround");
+        expect(callArgs[0][1].getParams).toEqual({consultant: "someone"});
+        expect(callArgs[0][1].name).toEqual("testWardroundName");
         expect(moment(callArgs[0][1].lastSet).isValid()).toEqual(true);
       });
 
@@ -93,30 +96,38 @@ describe('WardRoundUtils', function (){
     });
 
     describe('local storage not supported', function(){
-      fit('should handle the case when local storage is not supported', function(){
+      it('should handle the case when local storage is not supported', function(){
         $httpBackend.expectGET('/wardround/testWardround?consultant=someone').respond({
           episodes: [{id: 1}],
         });
         spyOn(localStorageService, "get");
         spyOn(localStorageService, "set");
         localStorageService.isSupported = false;
-        var episodeIdsPromise = wardroundUtils.getEpisodesIds();
+        var episodeIdsPromise = wardroundUtils.getWardroundDetail();
         $httpBackend.flush();
         expect(localStorageService.get.calls.any()).toEqual(false);
         expect(localStorageService.set.calls.any()).toEqual(false);
         episodeIdsPromise.then(function(r){
-          expect(r).toEqual([1]);
+          expect(r.episodeIds).toEqual([1]);
         });
       });
     });
 
     describe('cache is populated', function(){
-      it('should return the values from cache if the cache is supported', function(){
+      fit('should return the values from cache if the cache is supported', function(){
         spyOn(localStorageService, "get").and.returnValue(fakeWardroundCacheObject);
-        var episodeIdsPromise = wardroundUtils.getEpisodesIds();
+        var episodeIdsPromise = wardroundUtils.getWardroundDetail();
         episodeIdsPromise.then(function(r){
-          expect(r).toEqual([1]);
+          expect(r.episodeIds).toEqual([1]);
         });
+      });
+    });
+
+    describe('can be cleaned', function(){
+      it('should clean out the cache', function(){
+        spyOn(localStorageService, "remove").and.returnValue(fakeWardroundCacheObject);
+        var episodeIdsPromise = wardroundUtils.cleanLocalStorage();
+        expect(localStorageService.remove.calls.any()).toEqual(true);
       });
     });
 });

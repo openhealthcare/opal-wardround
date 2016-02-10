@@ -45,9 +45,9 @@ app.config(function($routeProvider){
                 episode: function(episodeLoader){
                     return episodeLoader();
                 },
-                episodeIds: function(WardRoundUtils, $route, $location){
+                wardroundDetail: function(WardRoundUtils, $route, $location){
                     var w = new WardRoundUtils($route.current.params.wardround, $location.search());
-                    return w.getEpisodesIds();
+                    return w.getWardroundDetail();
                 },
             		options: function(Options) { return Options; },
                 profile: function(UserProfile){ return UserProfile }

@@ -27,11 +27,6 @@ describe('WardRoundFindPatientCtrl', function (){
         });
     }));
 
-    afterEach(function() {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
-
     describe('get_filtered_episodes()', function (){
 
         it('Should allow all episodes when the query is ""', function () {
