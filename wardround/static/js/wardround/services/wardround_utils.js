@@ -107,7 +107,7 @@ angular.module('opal.wardround.services')
       episodeIdPromise.then(function(wardroundDetail){
         var getUrl = '/wardround/'+ wardroundDetail.wardroundSlug;
         getUrl = getUrl + "/find_patient";
-        $http.get(getUrl, {params: {episode_id: wardroundDetail.episodeIds}}).then(
+        $http.get(getUrl, {params: {e: wardroundDetail.episodeIds}}).then(
           function(resource) {
             var wardround = self.castWardRounds(resource.data);
             deferred.resolve(wardround);

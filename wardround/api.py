@@ -35,6 +35,6 @@ class FindPatientView(APIView):
 
         wardround = w(request)
 
-        episode_ids = request.GET.getlist("episode_id")
+        episode_ids = request.GET.getlist("e")
         response = wardround.find_patient_table(episode_ids)
         return _build_json_response(response)
