@@ -26,6 +26,16 @@ module.exports = function(config){
             'angular-strap-2.0.3/modules/timepicker.tpl.js',
             'angular-strap-2.0.3/modules/typeahead.js',
             'angular-strap-2.0.3/modules/typeahead.tpl.js',
+            "angulartics-0.17.2/angulartics.min.js",
+            "angulartics-0.17.2/angulartics-ga.min.js",
+            'mgcrea.ngStrap.typeahead',
+            'mgcrea.ngStrap.helpers.dimensions',
+            'mgcrea.ngStrap.helpers.parseOptions',
+            'mgcrea.ngStrap.tooltip',
+            'mgcrea.ngStrap.popover',
+            'mgcrea.ngStrap.helpers.dateParser',
+            'mgcrea.ngStrap.datepicker',
+            'mgcrea.ngStrap.timepicker',
             'ngprogress-lite/ngprogress-lite.js',
             'jquery-1.11.0/jquery.js',
             'utils/underscore.js',
@@ -33,18 +43,26 @@ module.exports = function(config){
             'bower_components/angular-growl-v2/build/angular-growl.js',
             'bower_components/ment.io/dist/mentio.js',
             'bower_components/ment.io/dist/templates.js',
+            "bower_components/angular-local-storage/dist/angular-local-storage.js",
 
             'opal/utils.js',
+            'opal/directives.js',
+            'opal/filters.js',
             'opal/services_module.js',
             'opal/services/*.js',
             'opal/services/flow.js',
             'opal/controllers_module.js',
             'opal/controllers/*.js',
-
+            // 'opal/app.js',
+            // '../../../../elcid/elcid/assets/js/elcid/*.js',
             __dirname+'/../wardround/static/js/wardround/*.js',
             __dirname+'/../wardround/static/js/wardround/controllers/*.js',
+            __dirname+'/../wardround/static/js/wardround/services/*.js',
             __dirname+'/../wardround/static/js/test/*.js',
-            
+
+            // 'opaltest/*.js',
+            // '../../../../elcid/elcid/assets/js/elcidtest/*.js',
+
         ],
 
         // Stolen from http://oligofren.wordpress.com/2014/05/27/running-karma-tests-on-browserstack/
@@ -56,5 +74,3 @@ module.exports = function(config){
 
     })
 }
-
-

@@ -4,10 +4,7 @@
 var opal = OPAL.module('opal');
 var services = OPAL.module('opal.wardround.services', []);
 
-var controllers = OPAL.module('opal.wardround.controllers', [
-    'opal.services',
-    'opal.wardround.services'
-]);
+var controllers = OPAL.module('opal.wardround.controllers', ['opal.services']);
 
 var app = OPAL.module('opal.wardround', [
     'ngRoute',
@@ -17,7 +14,8 @@ var app = OPAL.module('opal.wardround', [
     'opal.services',
     'opal.directives',
     'opal.controllers',
-    'opal.wardround.controllers'
+    'opal.wardround.controllers',
+    'opal.wardround.services'
 ]);
 OPAL.run(app);
 
@@ -31,20 +29,28 @@ app.config(function($routeProvider){
         .when('/:wardround', {
             controller: 'WardRoundCtrl',
             resolve: {
-                ward_round: function(wardRoundLoader){ return wardRoundLoader(); },
+                wardround: function(WardRoundUtils, $route, $location){
+                  var w = new WardRoundUtils($route.current.params.wardround, $location.search());
+                  return w.loadWardRound();
+                },
             		options: function(Options) { return Options; },
             },
             templateUrl: function(params){
                 return '/wardround/templates/' + params.wardround + '/detail.html';
             }
         })
-        .when('/:wardround/:episode_id', {
+        .when('/:wardround/:id', {
             controller: 'WardRoundDetailCtrl',
             resolve: {
-                ward_round: function(wardRoundLoader){ return wardRoundLoader() },
+                episode: function(episodeLoader){
+                    return episodeLoader();
+                },
+                wardroundDetail: function(WardRoundUtils, $route, $location){
+                    var w = new WardRoundUtils($route.current.params.wardround, $location.search());
+                    return w.getWardroundDetail();
+                },
             		options: function(Options) { return Options; },
                 profile: function(UserProfile){ return UserProfile }
-
             },
             templateUrl: function(params){
                 return '/wardround/templates/' + params.wardround + '/episode_detail.html'

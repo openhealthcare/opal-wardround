@@ -10,7 +10,7 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-12" ng-show="episodes.length == 0">
+        <div class="col-md-12" ng-hide="episodes.length">
           <p class="lead">
             <b>No episodes</b> currently match this ward round's criteria.
           </p>
@@ -25,22 +25,19 @@
       </div>
       <div class="row">
         {% include wardround.filter_template %}
-        {% endif %} 
-        <div class="col-md-12" ng-hide="episodes.length == 0">
+        {% endif %}
+        <div class="col-md-12" ng-show="episodes.length">
           <p>
             <center>
-            <button type="button" class="btn btn-lg btn-primary"
-                    ng-click="start()"
-                    >
-              <i class="fa fa-arrow-right"></i>
-              Start this ward round
-            </button>
+              <a type="button" class="btn btn-lg btn-primary" href="[[ wardround.episodes[0].link ]]">
+                <i class="fa fa-arrow-right"></i>
+                Start this ward round
+              </a>
             </center>
           </p>
+        </div>
 
-        </div> 
-
-        {% include 'partials/_episode_summary_table.html' %}
+        {% include 'wardround/partials/episode_summary_table.html' %}
       </div>
     </div>
   </div>
