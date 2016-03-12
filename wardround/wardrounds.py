@@ -1,37 +1,19 @@
 from copy import copy
 
-from opal.core import app_importer
+from opal.core import discoverable
 from opal.utils import camelcase_to_underscore
 from opal.models import Episode
 from collections import OrderedDict
 
 
-class BaseWardRound(object):
+class BaseWardRound(discoverable.DiscoverableFeature):
     """
     Ward round utility methods - shouldn't have to override these !
     """
+    module_name = 'wardrounds'
+
     name = None
     description = None
-
-    @classmethod
-    def get(klass, name):
-        """
-        Return a specific ward round by slug
-        """
-        for sub in klass.list():
-            if sub.slug() == name:
-                return sub
-
-    @classmethod
-    def list(klass):
-        """
-        Return a list of all ward rounds
-        """
-        return app_importer.get_subclass("wardrounds", klass)
-
-    @classmethod
-    def slug(klass):
-        return camelcase_to_underscore(klass.name).replace(' ', '')
 
 
 class WardRound(BaseWardRound):
