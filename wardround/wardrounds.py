@@ -12,7 +12,7 @@ class BaseWardRound(discoverable.DiscoverableFeature):
     """
     module_name = 'wardrounds'
 
-    name = None
+    display_name = None
     description = None
 
 
@@ -72,7 +72,7 @@ class WardRound(BaseWardRound):
 
         columns = field_dict.values()
 
-        return dict(name=self.name,
+        return dict(name=self.display_name,
                     description=self.description,
                     episodes=episodes,
                     fields=field_dict.values(),
