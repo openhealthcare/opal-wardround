@@ -8,10 +8,10 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='opal-wardround',
-    version='0.1',
+    version='0.5',
     packages=['wardround'],
     include_package_data=True,
-    license='GPL3',  
+    license='GPL3',
     description='OPAL Plugin for (Virtual) Ward Rounds',
     long_description=README,
     url='http://opal.openhealthcare.org.uk/',

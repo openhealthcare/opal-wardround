@@ -1,0 +1,10 @@
+[run]
+source =
+    wardround
+omit =
+    wardround/tests/*
+    */migrations/*
+
+[report]
+exclude_lines =
+    def __unicode__

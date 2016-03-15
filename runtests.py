@@ -40,7 +40,11 @@ settings.configure(DEBUG=True,
                                    'compressor',
                                    'opal',
                                    'opal.tests',
-                                   'wardround',))
+                                   'wardround',),
+                   MIGRATION_MODULES={
+                       'opal': 'opal.nomigrations'
+                   }
+)
 
 from opal.core import application
 class Application(application.OpalApplication):

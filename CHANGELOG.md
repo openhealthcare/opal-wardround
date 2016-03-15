@@ -1,3 +1,7 @@
+## 0.5 Release
+
+Converts BaseWardRound to use opal.core.discoverable.
+
 ## 0.4 Release
 
 Ground up rewrite, uses the new generic class finder features from opal. Uses local
