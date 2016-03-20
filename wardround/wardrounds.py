@@ -20,7 +20,7 @@ class WardRound(BaseWardRound):
     """
     Base Ward Round class - individual wardrounds should override this.
     """
-    name = 'PLEASE NAME ME Larry!'
+    display_name = 'PLEASE NAME ME Larry!'
     description = 'PLEASE DESCRIBE ME Larry!'
     detail_template = 'detail/wardround_default.html'
     filter_template = None
