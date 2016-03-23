@@ -7,7 +7,7 @@ from opal.tests.models import Demographics
 from wardround.wardrounds import WardRound
 
 class TestWardround(WardRound):
-    name = "test"
+    display_name = "test"
     description = "test wardround"
 
     @property
