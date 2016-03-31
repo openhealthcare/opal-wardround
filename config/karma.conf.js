@@ -6,7 +6,7 @@ module.exports = function(config){
         basePath = '/home/travis/virtualenv/python2.7/src/opal/opal/static/js';
         coverageReporter = {
             type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
-            dir: '../../../coverage/',
+            dir: __dirname + '/../coverage/',
         };
     }
     else{
@@ -80,8 +80,10 @@ module.exports = function(config){
         browserNoActivityTimeout : 4*60*1000, //default 10000
         captureTimeout : 4*60*1000, //default 60000
         preprocessors: {
-            'opal/**/*.js': 'coverage',
-            '../../core/search/static/js/search/**/*.js': 'coverage',
+              __dirname+'/../wardround/static/js/wardround/*.js': 'coverage',
+             __dirname+'/../wardround/static/js/wardround/controllers/*.js':'coverage',
+             __dirname+'/../wardround/static/js/wardround/services/*.js': 'coverage',
+             __dirname+'/../wardround/static/js/test/*.js': 'coverage',
         },
         reporters: ['progress', 'coverage'],
         coverageReporter: coverageReporter
