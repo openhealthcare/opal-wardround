@@ -22,21 +22,6 @@ class TestWardround(WardRound):
 class WardroundTest(OpalTestCase):
 
     patient_1_dict = dict(
-<<<<<<< HEAD
-        first_name="James",
-        surname="Jameson",
-        hospital_number="2",
-        date_of_birth=date(1985, 10, 1),
-        sex_ft="Male"
-    )
-
-    patient_2_dict = dict(
-        first_name="Sue",
-        surname="Smithson",
-        hospital_number="1",
-        date_of_birth=date(1980, 10, 1),
-        sex_ft="Female"
-=======
         first_name = "James",
         surname = "Jameson",
         hospital_number = "2",
@@ -50,7 +35,6 @@ class WardroundTest(OpalTestCase):
         hospital_number = "1",
         date_of_birth = date(1980, 10, 1),
         sex_ft = "Female"
->>>>>>> v0.6
     )
 
     def setUp(self, *args, **kwargs):

@@ -85,12 +85,12 @@ describe('WardRoundUtils', function (){
       });
       //
       it('should load from the server if the cache is a different wardround', function(){
-        fakeWardroundCacheObject.wardround = "other wardround";
+        fakeWardroundCacheObject.wardroundSlug = "other_wardround";
         spyOn(localStorageService, "get").and.returnValue(fakeWardroundCacheObject);
       });
 
       it('should load from the server if the cache is using different get params', function(){
-        fakeWardroundCacheObject.params = {consultant: "other"};
+        fakeWardroundCacheObject.getParams = {consultant: "other"};
         spyOn(localStorageService, "get").and.returnValue(fakeWardroundCacheObject);
       });
     });
@@ -114,7 +114,7 @@ describe('WardRoundUtils', function (){
     });
 
     describe('cache is populated', function(){
-      fit('should return the values from cache if the cache is supported', function(){
+      it('should return the values from cache if the cache is supported', function(){
         spyOn(localStorageService, "get").and.returnValue(fakeWardroundCacheObject);
         var episodeIdsPromise = wardroundUtils.getWardroundDetail();
         episodeIdsPromise.then(function(r){
