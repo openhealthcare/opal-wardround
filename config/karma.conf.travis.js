@@ -60,10 +60,10 @@ module.exports = function(config){
             'opal/services/flow.js',
             'opal/controllers_module.js',
             'opal/controllers/*.js',
-            'opal/app.js',
-            '../../core/search/static/js/search/controllers/*',
-            '../../core/search/static/js/search/services/*',
-            'opaltest/*.js',
+             __dirname+'/../wardround/static/js/wardround/*.js',
+             __dirname+'/../wardround/static/js/wardround/controllers/*.js',
+             __dirname+'/../wardround/static/js/wardround/services/*.js',
+             __dirname+'/../wardround/static/js/test/*.js',
         ],
 
         // Stolen from http://oligofren.wordpress.com/2014/05/27/running-karma-tests-on-browserstack/
