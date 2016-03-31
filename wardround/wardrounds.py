@@ -41,7 +41,8 @@ class WardRound(BaseWardRound):
         """
         list_columns = OrderedDict()
         list_columns["patient__demographics__hospital_number"] = "Hospital #"
-        list_columns["patient__demographics__name"] = "Name"
+        list_columns["patient__demographics__first_name"] = "First Name"
+        list_columns["patient__demographics__surname"] = "Surname"
         list_columns["patient__demographics__date_of_birth"] = "DOB"
         list_columns["date_of_admission"] = "Admitted"
         list_columns["discharge_date"] = "Discharged"

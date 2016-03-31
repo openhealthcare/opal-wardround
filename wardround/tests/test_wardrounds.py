@@ -13,7 +13,7 @@ class TestWardround(WardRound):
     @property
     def find_patient_columns(self):
         c = copy.copy(self.list_columns)
-        c["patient__demographics__gender_ft"] = "Gender"
+        c["patient__demographics__sex_ft"] = "Sex"
         return c
 
     def episodes(self):
@@ -23,19 +23,20 @@ class TestWardround(WardRound):
 class WardroundTest(OpalTestCase):
 
     patient_1_dict = dict(
-        name = "James Jameson",
-        hospital_number = "2",
-        date_of_birth = date(1985, 10, 1),
-        gender_ft = "Male"
+        first_name="James",
+        surname="Jameson",
+        hospital_number="2",
+        date_of_birth=date(1985, 10, 1),
+        sex_ft="Male"
     )
 
     patient_2_dict = dict(
-        name = "Sue Smithson",
-        hospital_number = "1",
-        date_of_birth = date(1980, 10, 1),
-        gender_ft = "Female"
+        first_name="Sue",
+        surname="Smithson",
+        hospital_number="1",
+        date_of_birth=date(1980, 10, 1),
+        sex_ft="Female"
     )
-
 
     def setUp(self, *args, **kwargs):
         self.patient_1 = Patient.objects.create()
@@ -58,7 +59,7 @@ class WardroundTest(OpalTestCase):
         table_dict = self.wardround.list_view_table()
         expected = {
             'columns': [
-                'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged'
+                'Hospital #', 'First Name', 'Surname', 'DOB', 'Admitted', 'Discharged'
             ],
             'auto_start': True,
             'description': 'test wardround',
@@ -68,7 +69,8 @@ class WardroundTest(OpalTestCase):
                     'DOB': date(1980, 10, 1),
                     'Discharged': None,
                     'Hospital #': u'1',
-                    'Name': u'Sue Smithson',
+                    'First Name': "Sue",
+                    'Surname': "Smithson",
                     'id': 2
                 },
                 {
@@ -76,12 +78,13 @@ class WardroundTest(OpalTestCase):
                     'DOB': date(1985, 10, 1),
                     'Discharged': None,
                     'Hospital #': u'2',
-                    'Name': u'James Jameson',
+                    'First Name': "James",
+                    'Surname': "Jameson",
                     'id': 1
                 }
             ],
             'fields': [
-                'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged'
+                'Hospital #', 'First Name', 'Surname', 'DOB', 'Admitted', 'Discharged'
             ],
             'name': 'test'
         }
@@ -93,7 +96,7 @@ class WardroundTest(OpalTestCase):
         table_dict = self.wardround.find_patient_table(episode_ids)
         expected = {
             'columns': [
-                'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged', 'Gender'
+                'Hospital #', 'First Name', 'Surname', 'DOB', 'Admitted', 'Discharged', 'Sex'
             ],
             'description': 'test wardround',
             'auto_start': True,
@@ -102,24 +105,27 @@ class WardroundTest(OpalTestCase):
                     'Admitted': None,
                     'DOB': date(1980, 10, 1),
                     'Discharged': None,
-                    'Gender': "Female",
+                    'Sex': "Female",
                     'Hospital #': u'1',
-                    'Name': u'Sue Smithson',
+                    'First Name': "Sue",
+                    'Surname': "Smithson",
                     'id': 2
                 },
                 {
                     'Admitted': None,
                     'DOB': date(1985, 10, 1),
                     'Discharged': None,
-                    'Gender': "Male",
+                    'Sex': "Male",
                     'Hospital #': u'2',
-                    'Name': u'James Jameson',
+                    'First Name': "James",
+                    'Surname': "Jameson",
                     'id': 1
                 }
             ],
             'fields': [
-                'Hospital #', 'Name', 'DOB', 'Admitted', 'Discharged', 'Gender'
+                'Hospital #', 'First Name', 'Surname', 'DOB', 'Admitted', 'Discharged', 'Sex'
             ],
             'name': 'test'
         }
+
         self.assertEqual(table_dict, expected)
