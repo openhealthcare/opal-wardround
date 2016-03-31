@@ -1,11 +1,11 @@
 module.exports = function(config){
     var browsers, basePath, coverageReporter;
-    var preprocessors = {
-              __dirname+'/../wardround/static/js/wardround/*.js': 'coverage',
-             __dirname+'/../wardround/static/js/wardround/controllers/*.js':'coverage',
-             __dirname+'/../wardround/static/js/wardround/services/*.js': 'coverage',
-             __dirname+'/../wardround/static/js/test/*.js': 'coverage',
-        };
+    var preprocessors = {}
+    preprocessors[__dirname+'/../wardround/static/js/wardround/*.js'] = 'coverage';
+    preprocessors[__dirname+'/../wardround/static/js/wardround/controllers/*.js'] ='coverage';
+    preprocessors[__dirname+'/../wardround/static/js/wardround/services/*.js'] = 'coverage';
+    preprocessors[__dirname+'/../wardround/static/js/test/*.js'] = 'coverage';
+    
     if(process.env.TRAVIS){
         browsers = ["Firefox"];
         basePath = '/home/travis/virtualenv/python2.7/src/opal/opal/static/js';
