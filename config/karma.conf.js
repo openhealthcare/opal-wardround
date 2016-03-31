@@ -1,13 +1,21 @@
 module.exports = function(config){
-    var browsers, basePath;
+    var browsers, basePath, coverageReporter;
 
     if(process.env.TRAVIS){
         browsers = ["Firefox"];
         basePath = '/home/travis/virtualenv/python2.7/src/opal/opal/static/js';
+        coverageReporter = {
+            type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
+            dir: '../../../coverage/',
+        };
     }
     else{
         browsers = ['PhantomJS'];
         basePath = '../../opal/opal/static/js';
+        coverageReporter = {
+            type : 'html',
+            dir : '../../../htmlcov/js/'
+        }
     }
 
     config.set({
@@ -76,10 +84,6 @@ module.exports = function(config){
             '../../core/search/static/js/search/**/*.js': 'coverage',
         },
         reporters: ['progress', 'coverage'],
-        coverageReporter: {
-            type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
-            dir: '../../../coverage/',
-        }
-
+        coverageReporter: coverageReporter
     });
 };
