@@ -1,8 +1,32 @@
 module.exports = function(config){
+    var browsers, basePath, coverageReporter;
+    var preprocessors = {}
+    preprocessors[__dirname+'/../wardround/static/js/wardround/*.js'] = 'coverage';
+    preprocessors[__dirname+'/../wardround/static/js/wardround/controllers/*.js'] ='coverage';
+    preprocessors[__dirname+'/../wardround/static/js/wardround/services/*.js'] = 'coverage';
+    preprocessors[__dirname+'/../wardround/static/js/test/*.js'] = 'coverage';
+    
+    if(process.env.TRAVIS){
+        browsers = ["Firefox"];
+        basePath = '/home/travis/virtualenv/python2.7/src/opal/opal/static/js';
+        coverageReporter = {
+            type: 'lcovonly', // lcov or lcovonly are required for generating lcov.info files
+            dir: __dirname + '/../coverage/',
+        };
+    }
+    else{
+        browsers = ['PhantomJS'];
+        basePath = '../../opal/opal/static/js';
+        coverageReporter = {
+            type : 'html',
+            dir : '../../../htmlcov/js/'
+        }
+    }
+
     config.set({
         frameworks: ['jasmine'],
-        browsers: ['PhantomJS'],
-        basePath:  '/usr/lib/ohc/opal/opal/static/js',
+        browsers: browsers,
+        basePath:  basePath,
 
         files: [
             //JASMINE,
@@ -30,17 +54,10 @@ module.exports = function(config){
             'angular-strap-2.3.1/modules/typeahead.tpl.js',
             "angulartics-0.17.2/angulartics.min.js",
             "angulartics-0.17.2/angulartics-ga.min.js",
-            'mgcrea.ngStrap.typeahead',
-            'mgcrea.ngStrap.helpers.dimensions',
-            'mgcrea.ngStrap.helpers.parseOptions',
-            'mgcrea.ngStrap.tooltip',
-            'mgcrea.ngStrap.popover',
-            'mgcrea.ngStrap.helpers.dateParser',
-            'mgcrea.ngStrap.datepicker',
-            'mgcrea.ngStrap.timepicker',
             'ngprogress-lite/ngprogress-lite.js',
             'jquery-1.11.3/jquery-1.11.3.js',
             'utils/underscore.js',
+            'utils/showdown.js',
             'utils/moment.js',
             'bower_components/angular-growl-v2/build/angular-growl.js',
             'bower_components/ment.io/dist/mentio.js',
@@ -48,6 +65,7 @@ module.exports = function(config){
             'bower_components/angular-ui-select/dist/select.js',
             "bower_components/angular-local-storage/dist/angular-local-storage.js",
             'opal/utils.js',
+            'opal/opaldown.js',
             'opal/directives.js',
             'opal/filters.js',
             'opal/services_module.js',
@@ -55,17 +73,19 @@ module.exports = function(config){
             'opal/services/flow.js',
             'opal/controllers_module.js',
             'opal/controllers/*.js',
-            'opal/app.js',
-            // 'opal/app.js',
-            // '../../../../elcid/elcid/assets/js/elcid/*.js',
-            '../../../../opal-wardround/wardround/static/js/wardround/*.js',
-            '../../../../opal-wardround/wardround/static/js/wardround/controllers/*.js',
-            '../../../../opal-wardround/wardround/static/js/wardround/services/*.js',
-            '../../../../opal-wardround/wardround/static/js/test/*.js',
-
-            // 'opaltest/*.js',
-            // '../../../../elcid/elcid/assets/js/elcidtest/*.js',
+             __dirname+'/../wardround/static/js/wardround/*.js',
+             __dirname+'/../wardround/static/js/wardround/controllers/*.js',
+             __dirname+'/../wardround/static/js/wardround/services/*.js',
+             __dirname+'/../wardround/static/js/test/*.js',
         ],
 
-    })
-}
+        // Stolen from http://oligofren.wordpress.com/2014/05/27/running-karma-tests-on-browserstack/
+        browserDisconnectTimeout : 10000, // default 2000
+        browserDisconnectTolerance : 1, // default 0
+        browserNoActivityTimeout : 4*60*1000, //default 10000
+        captureTimeout : 4*60*1000, //default 60000
+        preprocessors: preprocessors,
+        reporters: ['progress', 'coverage'],
+        coverageReporter: coverageReporter
+    });
+};

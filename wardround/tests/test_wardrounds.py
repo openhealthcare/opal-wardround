@@ -37,7 +37,6 @@ class WardroundTest(OpalTestCase):
         sex_ft = "Female"
     )
 
-
     def setUp(self, *args, **kwargs):
         self.patient_1 = Patient.objects.create()
         self.patient_1.demographics_set.update(
@@ -127,4 +126,5 @@ class WardroundTest(OpalTestCase):
             ],
             'name': 'test'
         }
+
         self.assertEqual(table_dict, expected)
