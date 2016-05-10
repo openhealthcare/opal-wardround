@@ -2,8 +2,8 @@
 // Start page for our ward round !
 //
 angular.module('opal.wardround.controllers').controller(
-  'WardRoundCtrl', function($rootScope, $scope, $routeParams, $location,
-    $cookieStore, wardround, options, localStorageService, WardRoundUtils){
+  'WardRoundCtrl', function($scope, $routeParams, $location,
+      WardRoundUtils, wardround, options){
 
       "use strict";
       $scope.ready = false;
@@ -28,7 +28,7 @@ angular.module('opal.wardround.controllers').controller(
         $location.search($scope.filters);
       }, true);
 
-      if(wardround.auto_start){
+      if(wardround.auto_start && wardround.episodes.length){
         $location.path($routeParams.wardround + '/' + $scope.wardround.episodes[0].id);
         $location.replace();
       }
