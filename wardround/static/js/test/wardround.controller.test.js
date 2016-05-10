@@ -39,7 +39,7 @@ describe('WardRoundCtrl', function (){
         spyOn($location, "replace");
       });
 
-      fit("should redirect if the wardround is autostart and there are episodes", function(){
+      it("should redirect if the wardround is autostart and there are episodes", function(){
           var wardround = {
               auto_start: true,
               episodes: [{id: 100}]
