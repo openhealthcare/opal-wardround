@@ -34,7 +34,7 @@ angular.module('opal.wardround.controllers').controller(
           backdrop: 'static',
           templateUrl: '/templates/wardround/find_patient.html',
           controller: 'WardRoundFindPatientCtrl',
-          size: 'md',
+          size: 'lg',
           resolve: {
             wardround: function(WardRoundUtils) {
               var w = new WardRoundUtils($routeParams.wardround, $location.search());
