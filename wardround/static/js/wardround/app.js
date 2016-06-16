@@ -2,7 +2,7 @@
 // Main OPAL Ward round plugin application!
 //
 var opal = OPAL.module('opal');
-var services = OPAL.module('opal.wardround.services', []);
+var services = OPAL.module('opal.wardround.services', ['opal.services']);
 
 var controllers = OPAL.module('opal.wardround.controllers', ['opal.services']);
 

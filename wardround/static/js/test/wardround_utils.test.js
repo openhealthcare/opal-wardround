@@ -28,7 +28,7 @@ describe('WardRoundUtils', function (){
       loads a wardround using wardround and location.search
       gives the output links
       */
-      it('Should load in wardround and cast them', function () {
+        it('Should load in wardround and cast them', function () {
           $httpBackend.expectGET('/wardround/testWardround?consultant=someone').respond({
             episodes: [{id: 1}],
           });
