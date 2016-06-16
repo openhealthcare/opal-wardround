@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='opal-wardround',
-    version='0.5',
+    version='0.6.0',
     packages=['wardround'],
     include_package_data=True,
     license='GPL3',
