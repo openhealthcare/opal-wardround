@@ -1,3 +1,6 @@
+"""
+JSON APIs for OPAL ward rounds
+"""
 from rest_framework.views import APIView
 from wardrounds import WardRound
 from opal.core.views import _build_json_response

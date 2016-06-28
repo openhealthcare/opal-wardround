@@ -4,15 +4,12 @@ Plugin definition
 
 from opal.core import plugins
 
-from wardround.urls import urlpatterns
-
-
 class WardRoundsPlugin(plugins.OpalPlugin):
     """
     Main entrypoint to expose this plugin to the host
     OPAL instance !
     """
-    urls = urlpatterns
+
     javascripts = {
         'opal.wardround': [
             'js/wardround/app.js',
@@ -28,6 +25,12 @@ class WardRoundsPlugin(plugins.OpalPlugin):
             href="/wardround/#/", display="Ward Rounds", icon="fa fa-tasks",
             activepattern='/wardround', index=1)
     ]
+
+    @classmethod
+    def get_urls(klass):
+        from wardround.urls import urlpatterns
+        return urlpatterns
+
 
 
 plugins.register(WardRoundsPlugin)

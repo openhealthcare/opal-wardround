@@ -1,8 +1,10 @@
+"""
+Defines the basic discoverable Ward Round classes
+"""
 from copy import copy
 
 from opal.core import discoverable
 from opal.utils import camelcase_to_underscore
-from opal.models import Episode
 from collections import OrderedDict
 
 
@@ -60,6 +62,8 @@ class WardRound(BaseWardRound):
         method that returns an iterable of opal.models.Episode instances
         that are 'on' this ward round.
         """
+        from opal.models import Episode
+
         return Episode.objects.none()
 
     def serialize(self, episodes, field_dict):
@@ -86,5 +90,7 @@ class WardRound(BaseWardRound):
         return self.serialize(episodes, self.list_columns)
 
     def find_patient_table(self, episode_ids):
+        from opal.models import Episode
+
         episodes = Episode.objects.filter(id__in=episode_ids)
         return self.serialize(episodes, self.find_patient_columns)
