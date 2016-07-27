@@ -49,7 +49,8 @@ app.config(function($routeProvider){
                     var w = new WardRoundUtils($route.current.params.wardround, $location.search());
                     return w.getWardroundDetail();
                 },
-            		options: function(Options) { return Options; },
+            	options: function(Options) { return Options; },
+                referencedata: function(Referencedata){ return Referencedata },
                 profile: function(UserProfile){ return UserProfile }
             },
             templateUrl: function(params){

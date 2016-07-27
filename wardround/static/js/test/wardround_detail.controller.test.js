@@ -13,8 +13,11 @@ describe('WardRoundDetailCtrl', function(){
     };
 
     var options = {
-        condition: ['Another condition', 'Some condition'],
         tag_slugs: {tropical: 'tropical', id_inpatients: 'id-inpatients'}
+
+    };
+    var referencedata = {
+        condition: ['Another condition', 'Some condition'],
     }
 
     var episodeData = {
@@ -108,14 +111,15 @@ describe('WardRoundDetailCtrl', function(){
         };
 
         controller = $controller('WardRoundDetailCtrl', {
-            $scope      : $scope,
-            $modal      : $modal,
-            $cookieStore: $cookieStore,
-            Flow        : Flow,
-            episode     : episode,
+            $scope         : $scope,
+            $modal         : $modal,
+            $cookieStore   : $cookieStore,
+            Flow           : Flow,
+            episode        : episode,
             wardroundDetail: {episodeIds: [123]},
-            options     : options,
-            profile     : profile
+            options        : options,
+            referencedata  : referencedata,
+            profile        : profile
         });
     });
 
@@ -175,15 +179,16 @@ describe('WardRoundDetailCtrl', function(){
                     return {then: function(success, err){ success(episodeData) }}}) };
 
                 controller = $controller('WardRoundDetailCtrl', {
-                    $scope      : $scope,
-                    $modal      : $modal,
-                    $location   : $location,
-                    $cookieStore: $cookieStore,
-                    Flow        : Flow,
-                    episode     : episode,
+                    $scope         : $scope,
+                    $modal         : $modal,
+                    $location      : $location,
+                    $cookieStore   : $cookieStore,
+                    Flow           : Flow,
+                    episode        : episode,
                     wardroundDetail: {episodeIds: [123]},
-                    options     : options,
-                    profile     : profile
+                    options        : options,
+                    referencedata  : referencedata,
+                    profile        : profile
                 });
             });
 
@@ -213,14 +218,15 @@ describe('WardRoundDetailCtrl', function(){
                     return {then: function(success, err){ err(episodeData) }}}) };
 
                 controller = $controller('WardRoundDetailCtrl', {
-                    $scope      : $scope,
-                    $modal      : $modal,
-                    $cookieStore: $cookieStore,
-                    Flow        : Flow,
-                    episode     : episode,
+                    $scope         : $scope,
+                    $modal         : $modal,
+                    $cookieStore   : $cookieStore,
+                    Flow           : Flow,
+                    episode        : episode,
                     wardroundDetail: {episodeIds: [123]},
-                    options     : options,
-                    profile     : profile
+                    options        : options,
+                    referencedata  : referencedata,
+                    profile        : profile
                 });
             });
 

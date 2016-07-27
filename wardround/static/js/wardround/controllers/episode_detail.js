@@ -4,7 +4,7 @@
 angular.module('opal.wardround.controllers').controller(
     'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
                                     $cookieStore, $modal, episode, wardroundDetail, $modalStack,
-                                    Flow, options, profile, WardRoundUtils){
+                                    Flow, options, referencedata, profile, WardRoundUtils){
         "use strict";
 
         if(!_.contains(wardroundDetail.episodeIds, episode.id)){
@@ -18,10 +18,11 @@ angular.module('opal.wardround.controllers').controller(
 
         // this is currently used by some of the actions to figure out if we're in
         // a wardround. Its also used to add the title
-        $scope.ward_round = wardroundDetail;
-        $scope.options = options;
-        $scope.profile = profile;
-        $scope.Flow = Flow;
+        $scope.ward_round    = wardroundDetail;
+        $scope.options       = options;
+        $scope.referencedata = referencedata;
+        $scope.profile       = profile;
+        $scope.Flow          = Flow;
 
         $scope.wardRoundOrderCollapsed = true;
         $scope.episodeNumber = _.indexOf(wardroundDetail.episodeIds, $scope.episode.id);
