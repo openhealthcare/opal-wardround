@@ -18,14 +18,20 @@
       </p>
     </li>
     <li class="list-group-item">
-      <a ng-show="previous" class="btn btn-secondary btn-sm pull-left" href="[[ previous ]]">
-        <i class="fa fa-chevron-left"></i>
-        Previous
-      </a>
-      <a ng-show="next" class="btn btn-secondary btn-sm pull-right" href="[[ next ]]">
-        Next
-        <i class="fa fa-chevron-right"></i>
-      </a>
+      <div class="row">
+        <div class="col-md-12">
+          <a ng-show="previous" class="btn btn-secondary" href="[[ previous ]]">
+            <i class="fa fa-chevron-left small-icon"></i>
+            Previous
+          </a>
+        </div>
+        <div class="col-md-12">
+          <a ng-show="next" class="btn btn-secondary" href="[[ next ]]">
+            Next
+            <i class="fa fa-chevron-right small-icon"></i>
+          </a>
+        </div>
+      </div>
     </li>
   </ul>
 </div>
