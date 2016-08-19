@@ -12,7 +12,7 @@ describe('WardRoundDetailCtrl', function(){
         can_see_pid: function(){return true; }
     };
 
-    var options = {
+    var metadata = {
         tag_slugs: {tropical: 'tropical', id_inpatients: 'id-inpatients'}
 
     };
@@ -117,7 +117,7 @@ describe('WardRoundDetailCtrl', function(){
             Flow           : Flow,
             episode        : episode,
             wardroundDetail: {episodeIds: [123]},
-            options        : options,
+            metadata       : metadata,
             referencedata  : referencedata,
             profile        : profile
         });
@@ -186,7 +186,7 @@ describe('WardRoundDetailCtrl', function(){
                     Flow           : Flow,
                     episode        : episode,
                     wardroundDetail: {episodeIds: [123]},
-                    options        : options,
+                    metadata       : metadata,
                     referencedata  : referencedata,
                     profile        : profile
                 });
@@ -224,7 +224,7 @@ describe('WardRoundDetailCtrl', function(){
                     Flow           : Flow,
                     episode        : episode,
                     wardroundDetail: {episodeIds: [123]},
-                    options        : options,
+                    metadata       : metadata,
                     referencedata  : referencedata,
                     profile        : profile
                 });
