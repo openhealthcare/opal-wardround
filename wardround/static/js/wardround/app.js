@@ -33,7 +33,7 @@ app.config(function($routeProvider){
                   var w = new WardRoundUtils($route.current.params.wardround, $location.search());
                   return w.loadWardRound();
                 },
-            		options: function(Options) { return Options; },
+            	referencedata: function(Referencedata) { return Referencedata; },
             },
             templateUrl: function(params){
                 return '/wardround/templates/' + params.wardround + '/detail.html';
@@ -49,7 +49,7 @@ app.config(function($routeProvider){
                     var w = new WardRoundUtils($route.current.params.wardround, $location.search());
                     return w.getWardroundDetail();
                 },
-            	options: function(Options) { return Options; },
+            	metadata: function(Metadata) { return Metadata; },
                 referencedata: function(Referencedata){ return Referencedata },
                 profile: function(UserProfile){ return UserProfile }
             },

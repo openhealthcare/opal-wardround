@@ -15,7 +15,7 @@ describe('should configure our routes correctly!', function(){
 
     it('Detail view should resolve data', function(){
         var resolve = route.routes['/:wardround/:id'].resolve
-        expect(resolve.options()).toBe(undefined);
+        expect(resolve.metadata()).toBe(undefined);
         expect(resolve.referencedata()).toBe(undefined);
     })
 

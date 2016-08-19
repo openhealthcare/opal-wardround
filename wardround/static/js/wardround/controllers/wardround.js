@@ -3,7 +3,7 @@
 //
 angular.module('opal.wardround.controllers').controller(
   'WardRoundCtrl', function($scope, $routeParams, $location,
-      WardRoundUtils, wardround, options){
+      WardRoundUtils, wardround, referencedata){
 
       "use strict";
       $scope.ready = false;
@@ -17,12 +17,7 @@ angular.module('opal.wardround.controllers').controller(
       $scope.filters = $location.search();
       $scope.episodes = wardround.episodes;
 
-      // Put all of our lookuplists in scope.
-      for (var name in options) {
-        if (name.indexOf('micro_test') != 0) {
-          $scope[name + '_list'] = options[name];
-        }
-      }
+      _.extend($scope, referencedata.toLookuplists());
 
       $scope.$watch('filters', function() {
         $location.search($scope.filters);

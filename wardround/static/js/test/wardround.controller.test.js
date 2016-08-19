@@ -7,16 +7,16 @@ describe('WardRoundCtrl', function (){
         this.cleanLocalStorage = function(){};
     }
 
-    var createController = function(wardround, options){
-        if(!options){
-            options = {};
+    var createController = function(wardround, referencedata){
+        if(!referencedata){
+            referencedata = { toLookuplists: function(){return {}}};
         }
         return $controller('WardRoundCtrl', {
             $scope         : $scope,
             $location      : $location,
             $routeParams   : {wardround: "test"},
             WardRoundUtils : fakeWardRoundUtils,
-            options        : options,
+            referencedata  : referencedata,
             wardround      : wardround
         });
     };
