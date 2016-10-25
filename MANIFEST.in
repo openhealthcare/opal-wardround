@@ -1,0 +1,2 @@
+recursive-include wardround/static *
+recursive-include wardround/templates *
