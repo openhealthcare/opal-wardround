@@ -1,6 +1,7 @@
 ## 0.8.0 Release
 
 Backwards incompatible release requiring OPAL >= 0.8.0
+Adds a MANIFEST.in
 
 ## 0.7.1 Minor Release
 
