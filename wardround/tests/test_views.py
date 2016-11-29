@@ -9,12 +9,16 @@ from wardround import views
 
 __all__ = ["TestWardround"]
 
-class WardRoundEpisodeDetailTemplateViewTestCase(OpalTestCase):
 
+class WardRoundViewsTestCase(OpalTestCase):
     def setUp(self):
         self.request = self.rf.get('/wat')
-        self.view = views.WardRoundEpisodeDetailTemplateView()
+        self.view = self.active_view()
         self.view.request = self.request
+
+
+class WardRoundEpisodeDetailTemplateViewTestCase(WardRoundViewsTestCase):
+    active_view = views.WardRoundEpisodeDetailTemplateView
 
     def test_dispatch(self):
         self.view.dispatch(self.request, wardround_name='test')
@@ -28,6 +32,15 @@ class WardRoundEpisodeDetailTemplateViewTestCase(OpalTestCase):
         self.view.dispatch(self.request, wardround_name='test')
         names = self.view.get_template_names()
         self.assertEqual(['detail/wardround_default.html'], names)
+
+
+class WardRoundTemplateViewTestCase(WardRoundViewsTestCase):
+    active_view = views.WardRoundTemplateView
+
+    def test_dispatch(self):
+        self.view.dispatch(self.request, name='test')
+        self.assertEqual('test', self.view.name)
+
 
 class TestViews(OpalTestCase):
 
