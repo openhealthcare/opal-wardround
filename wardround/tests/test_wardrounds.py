@@ -54,6 +54,17 @@ class WardroundTest(OpalTestCase):
         self.wardround = TestWardround(request)
         return super(WardroundTest, self).setUp(*args, **kwargs)
 
+    def test_find_patient_columns(self):
+        mock_request = MagicMock(name='mock request')
+        self.assertEqual(
+            WardRound(mock_request).list_columns,
+            WardRound(mock_request).find_patient_columns)
+
+    def test_episodes(self):
+        mock_request = MagicMock(name='mock request')
+        self.assertEqual(0, len(WardRound(mock_request).episodes()))
+
+
     def test_list_view_dict(self):
         table_dict = self.wardround.list_view_table()
         expected = {
