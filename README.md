@@ -2,7 +2,7 @@ Virtual ward round plugin for OPAL.
 
 [![Build Status](https://travis-ci.org/openhealthcare/opal-wardround.svg?branch=master)](https://travis-ci.org/openhealthcare/opal-wardround)
 [![Coverage Status](https://coveralls.io/repos/github/openhealthcare/opal-wardround/badge.svg?branch=master)](https://coveralls.io/github/openhealthcare/opal-wardround?branch=master)
-[![PyPI version](https://badge.fury.io/py/opal.svg)](https://badge.fury.io/py/opal)
+[![PyPI version](https://badge.fury.io/py/opal-wardround.svg)](https://badge.fury.io/py/opal-wardround)
 
 Define wardronds in your implementation by subclassing wardrounds.WardRound.
 
