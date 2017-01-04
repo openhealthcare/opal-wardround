@@ -32,14 +32,13 @@ the value being an expression to eval. This expression will have access to the f
 
 #### Filter Helpers
 
-The wardrounds plugin also defines a Django Templatetag library that contains commonly used filters such as "Filter by team".
-
-(Note if you want to filter by historic teams you will need to override the serialisation staticmethod `.to_dict`
+The wardrounds plugin also defines a Django Templatetag library that contains commonly used filters such
+as "Filter by patient list".
 
 ```html
 {% load wardrounds %}
 <form class="form-horizontal col-md-8" role="form">
-  {% team_filter %}
+  {% patient_list_tags_filter %}
 </form>
 ```
 

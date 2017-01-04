@@ -3,8 +3,8 @@
   <div class="col-sm-8">
     <select class="form-control" ng-model="filters.team">
       <option value="">---------</option>
-      {% for team in teams %}
-      <option value="{{ team.name }}">{% if team.parent %}{{ team.parent.title }} / {% endif %}{{ team.title }}</option>
+      {% for list in lists %}
+      <option value="{{ list.tag }}">{{ list.display_name }}</option>
       {% endfor %}
     </select>
   </div>
