@@ -14,3 +14,4 @@ bower_components
 *#
 *.#
 opal_wardround.egg-info
+node_modules
