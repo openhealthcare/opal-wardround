@@ -1,8 +1,10 @@
 ## 0.8.0 Release
 
-Backwards incompatible release requiring OPAL >= 0.8.0
+Backwards incompatible release requiring Opal >= 0.8.0
 
 Adds a MANIFEST.in
+Removes the Team filter (Teams were removed in Opal 0.8)
+Adds a PatientList Filter
 
 ## 0.7.1 Minor Release
 
@@ -10,11 +12,11 @@ Adjusts formatting for next/prev buttons to stop them wrapping.
 
 ## 0.7.0 Release
 
-Backwards incompatible release requiring OPAL >= 0.7.0.
+Backwards incompatible release requiring Opal >= 0.7.0.
 
 ## 0.6.0 Release
 
-Backwards incompatible release requiring OPAL >= 0.6.0.
+Backwards incompatible release requiring Opal >= 0.6.0.
 
 ## 0.5 Release
 
