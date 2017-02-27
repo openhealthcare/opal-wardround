@@ -87,8 +87,8 @@ describe('WardRoundDetailCtrl', function(){
 
     beforeEach(function(){
         module('opal.wardround');
-        module('opal.wardround.services');
-        module('opal.wardround.controllers')
+        // module('opal.wardround.services');
+        // module('opal.wardround.controllers')
         inject(function($injector){
             $rootScope   = $injector.get('$rootScope');
             $scope       = $rootScope.$new();
@@ -126,7 +126,7 @@ describe('WardRoundDetailCtrl', function(){
     describe('initialization', function(){
 
         it('should set up state', function(){
-            $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
+            // $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
             $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
             expect($scope.episode).toEqual(episode);
         });
@@ -135,7 +135,6 @@ describe('WardRoundDetailCtrl', function(){
     describe('discharging an episode', function(){
 
         beforeEach(function(){
-            $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
             $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
         })
 
@@ -152,7 +151,7 @@ describe('WardRoundDetailCtrl', function(){
                 }
             );
             $rootScope.$apply();
-            $httpBackend.flush()
+            $httpBackend.flush();
         });
 
         describe('for a readonly user', function(){
@@ -193,7 +192,6 @@ describe('WardRoundDetailCtrl', function(){
             });
 
             it('should go to the episde', function() {
-                $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
                 spyOn($location, 'path');
                 $scope.addEpisode();
                 expect(Flow.enter).toHaveBeenCalledWith(
@@ -205,8 +203,6 @@ describe('WardRoundDetailCtrl', function(){
                         hospital_number: '555-333'
                     }
                 );
-                $rootScope.$apply();
-                $httpBackend.flush()
                 expect($location.path).toHaveBeenCalledWith('/episode/123');
             });
         });
@@ -215,7 +211,7 @@ describe('WardRoundDetailCtrl', function(){
 
             beforeEach(function(){
                 Flow = {enter: jasmine.createSpy('Flow.enter').and.callFake(function(){
-                    return {then: function(success, err){ err(episodeData) }}}) };
+                    return {then: function(success, err){ err(episodeData); }}}) };
 
                 controller = $controller('WardRoundDetailCtrl', {
                     $scope         : $scope,
@@ -231,7 +227,6 @@ describe('WardRoundDetailCtrl', function(){
             });
 
             it('should reset state if cancelled', function() {
-                $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
                 $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
 
                 $scope.addEpisode();
@@ -246,7 +241,7 @@ describe('WardRoundDetailCtrl', function(){
                     }
                 );
                 $rootScope.$apply();
-                $httpBackend.flush()
+                $httpBackend.flush();
                 expect($scope.state).toEqual('normal');
             });
 
