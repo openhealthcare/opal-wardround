@@ -3,7 +3,7 @@
 //
 angular.module('opal.wardround.controllers').controller(
     'WardRoundDetailCtrl', function($rootScope, $scope, $routeParams, $location,
-                                    $cookieStore, $modal, episode, wardroundDetail, $modalStack,
+                                    $modal, episode, wardroundDetail, $modalStack,
                                     Flow, metadata, referencedata, profile, WardRoundUtils){
         "use strict";
 
