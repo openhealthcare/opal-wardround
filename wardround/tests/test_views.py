@@ -42,6 +42,22 @@ class WardRoundTemplateViewTestCase(WardRoundViewsTestCase):
         self.assertEqual('test', self.view.name)
 
 
+class WardroundFindPatientTemplateTestCase(OpalTestCase):
+    def test_get(self):
+        self.assertTrue(
+            self.client.login(
+                username=self.user.username, password=self.PASSWORD
+            )
+        )
+        url = reverse(
+            'raw_template_view', kwargs=dict(
+                template_name='wardround/find_patient.html'
+            )
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+
 # class TestViews(OpalTestCase):
 
 #     def test_wardround_template_view(self):
