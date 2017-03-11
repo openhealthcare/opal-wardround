@@ -87,8 +87,6 @@ describe('WardRoundDetailCtrl', function(){
 
     beforeEach(function(){
         module('opal.wardround');
-        // module('opal.wardround.services');
-        // module('opal.wardround.controllers')
         inject(function($injector){
             $rootScope   = $injector.get('$rootScope');
             $scope       = $rootScope.$new();
@@ -126,7 +124,6 @@ describe('WardRoundDetailCtrl', function(){
     describe('initialization', function(){
 
         it('should set up state', function(){
-            // $httpBackend.expectGET('/api/v0.1/userprofile/').respond({});
             $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
             expect($scope.episode).toEqual(episode);
         });
@@ -136,7 +133,7 @@ describe('WardRoundDetailCtrl', function(){
 
         beforeEach(function(){
             $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
-        })
+        });
 
         it('should call the exit flow', function(){
 
