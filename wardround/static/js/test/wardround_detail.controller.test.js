@@ -1,7 +1,7 @@
 describe('WardRoundDetailCtrl', function(){
     "use strict";
 
-    var $scope, $cookieStore, $modal, $httpBackend, $location;
+    var $scope, $modal, $httpBackend, $location;
     var $rootScope, $q, $controller;
     var Flow, Episode, episode;
     var controller;
@@ -92,7 +92,6 @@ describe('WardRoundDetailCtrl', function(){
             $scope       = $rootScope.$new();
             $q           = $injector.get('$q');
             $controller  = $injector.get('$controller');
-            $cookieStore = $injector.get('$cookieStore');
             $modal       = $injector.get('$modal');
             $httpBackend = $injector.get('$httpBackend');
             $location    = $injector.get('$location');
@@ -111,7 +110,6 @@ describe('WardRoundDetailCtrl', function(){
         controller = $controller('WardRoundDetailCtrl', {
             $scope         : $scope,
             $modal         : $modal,
-            $cookieStore   : $cookieStore,
             Flow           : Flow,
             episode        : episode,
             wardroundDetail: {episodeIds: [123]},
@@ -178,7 +176,6 @@ describe('WardRoundDetailCtrl', function(){
                     $scope         : $scope,
                     $modal         : $modal,
                     $location      : $location,
-                    $cookieStore   : $cookieStore,
                     Flow           : Flow,
                     episode        : episode,
                     wardroundDetail: {episodeIds: [123]},
@@ -213,7 +210,6 @@ describe('WardRoundDetailCtrl', function(){
                 controller = $controller('WardRoundDetailCtrl', {
                     $scope         : $scope,
                     $modal         : $modal,
-                    $cookieStore   : $cookieStore,
                     Flow           : Flow,
                     episode        : episode,
                     wardroundDetail: {episodeIds: [123]},

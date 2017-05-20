@@ -1,3 +1,7 @@
+## 0.9.0 Release
+Bumping dependency onto v0.8.2
+
+
 ## 0.8.0 Release
 
 Backwards incompatible release requiring Opal >= 0.8.0

@@ -13,7 +13,7 @@ settings.configure(DEBUG=True,
                        }
                    },
                    OPAL_OPTIONS_MODULE='wardround.tests.dummy_options_module',
-                   ROOT_URLCONF='wardround.urls',
+                   ROOT_URLCONF='opal.urls',
                    STATIC_URL='/assets/',
                    STATIC_ROOT='static',
                    STATICFILES_FINDERS=(
