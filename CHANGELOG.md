@@ -1,5 +1,6 @@
 ## 0.9.0 Release
-Bumping dependency onto v0.8.2
+Bumping dependency onto v0.9.0
+Uses the new .load syntax for metadata, reference data, record schema and user profile
 
 
 ## 0.8.0 Release
