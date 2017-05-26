@@ -1,8 +1,7 @@
 """
 Plugin definition
 """
-
-from opal.core import plugins
+from opal.core import plugins, menus
 
 from wardround.urls import urlpatterns
 
@@ -24,7 +23,7 @@ class WardRoundsPlugin(plugins.OpalPlugin):
         ]
     }
     menuitems = [
-        dict(
+        menus.MenuItem(
             href="/wardround/#/", display="Ward Rounds", icon="fa fa-tasks",
             activepattern='/wardround', index=1)
     ]
