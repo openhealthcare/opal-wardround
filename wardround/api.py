@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from wardrounds import WardRound
-from opal.core.views import _build_json_response
+from opal.core.views import json_response
 from django.http import Http404
 
 
@@ -16,7 +16,7 @@ class WardRoundView(APIView):
 
         wardround = w(request)
 
-        serialised = _build_json_response(
+        serialised = json_response(
             wardround.list_view_table()
         )
         return serialised
@@ -37,4 +37,4 @@ class FindPatientView(APIView):
 
         episode_ids = request.GET.getlist("e")
         response = wardround.find_patient_table(episode_ids)
-        return _build_json_response(response)
+        return json_response(response)
