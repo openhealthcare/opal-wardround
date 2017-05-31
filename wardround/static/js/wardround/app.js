@@ -29,11 +29,11 @@ app.config(function($routeProvider){
         .when('/:wardround', {
             controller: 'WardRoundCtrl',
             resolve: {
-                wardround: function(WardRoundUtils, $route, $location){
-                  var w = new WardRoundUtils($route.current.params.wardround, $location.search());
-                  return w.loadWardRound();
-                },
-            	referencedata: function(Referencedata) { return Referencedata; },
+              wardround: function(WardRoundUtils, $route, $location){
+                var w = new WardRoundUtils($route.current.params.wardround, $location.search());
+                return w.loadWardRound();
+              },
+            	referencedata: function(Referencedata) { return Referencedata.load(); },
             },
             templateUrl: function(params){
                 return '/wardround/templates/' + params.wardround + '/detail.html';
@@ -49,12 +49,12 @@ app.config(function($routeProvider){
                     var w = new WardRoundUtils($route.current.params.wardround, $location.search());
                     return w.getWardroundDetail();
                 },
-            	metadata: function(Metadata) { return Metadata; },
-                referencedata: function(Referencedata){ return Referencedata },
-                profile: function(UserProfile){ return UserProfile }
+            	metadata: function(Metadata) { return Metadata.load(); },
+              referencedata: function(Referencedata){ return Referencedata.load(); },
+              profile: function(UserProfile){ return UserProfile.load(); }
             },
             templateUrl: function(params){
-                return '/wardround/templates/' + params.wardround + '/episode_detail.html'
+                return '/wardround/templates/' + params.wardround + '/episode_detail.html';
             }
-        })
-})
+        });
+});

@@ -87,8 +87,6 @@ describe('WardRoundDetailCtrl', function(){
 
     beforeEach(function(){
         module('opal.wardround');
-        module('opal.wardround.services');
-        module('opal.wardround.controllers')
         inject(function($injector){
             $rootScope   = $injector.get('$rootScope');
             $scope       = $rootScope.$new();
@@ -133,7 +131,7 @@ describe('WardRoundDetailCtrl', function(){
 
         beforeEach(function(){
             $httpBackend.expectGET('/wardround/templates/list.html').respond('notarealtemplate');
-        })
+        });
 
         it('should call the exit flow', function(){
 
@@ -148,7 +146,7 @@ describe('WardRoundDetailCtrl', function(){
                 }
             );
             $rootScope.$apply();
-            $httpBackend.flush()
+            $httpBackend.flush();
         });
 
         describe('for a readonly user', function(){
@@ -207,7 +205,7 @@ describe('WardRoundDetailCtrl', function(){
 
             beforeEach(function(){
                 Flow = {enter: jasmine.createSpy('Flow.enter').and.callFake(function(){
-                    return {then: function(success, err){ err(episodeData) }}}) };
+                    return {then: function(success, err){ err(episodeData); }}}) };
 
                 controller = $controller('WardRoundDetailCtrl', {
                     $scope         : $scope,
@@ -236,7 +234,7 @@ describe('WardRoundDetailCtrl', function(){
                     }
                 );
                 $rootScope.$apply();
-                $httpBackend.flush()
+                $httpBackend.flush();
                 expect($scope.state).toEqual('normal');
             });
 
