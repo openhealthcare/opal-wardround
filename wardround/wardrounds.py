@@ -44,8 +44,8 @@ class WardRound(BaseWardRound):
         list_columns["patient__demographics__first_name"] = "First Name"
         list_columns["patient__demographics__surname"] = "Surname"
         list_columns["patient__demographics__date_of_birth"] = "DOB"
-        list_columns["date_of_admission"] = "Admitted"
-        list_columns["discharge_date"] = "Discharged"
+        list_columns["start"] = "Admitted"
+        list_columns["end"] = "Discharged"
         return list_columns
 
     @property
