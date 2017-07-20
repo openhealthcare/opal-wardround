@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from wardrounds import WardRound
+from wardround.wardrounds import WardRound
 from opal.core.views import json_response
 from django.http import Http404
 
