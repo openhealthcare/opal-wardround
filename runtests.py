@@ -58,6 +58,9 @@ django.setup()
 
 from django.test.runner import DiscoverRunner
 test_runner = DiscoverRunner(verbosity=1)
-failures = test_runner.run_tests(['wardround', ])
+if len(sys.argv) == 2:
+    failures = test_runner.run_tests([sys.argv[-1], ])
+else:
+    failures = test_runner.run_tests(['wardround', ])
 if failures:
     sys.exit(failures)
