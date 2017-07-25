@@ -44,8 +44,8 @@ class WardRound(BaseWardRound):
         list_columns["patient__demographics__first_name"] = "First Name"
         list_columns["patient__demographics__surname"] = "Surname"
         list_columns["patient__demographics__date_of_birth"] = "DOB"
-        list_columns["date_of_admission"] = "Admitted"
-        list_columns["discharge_date"] = "Discharged"
+        list_columns["start"] = "Admitted"
+        list_columns["end"] = "Discharged"
         return list_columns
 
     @property
@@ -66,17 +66,17 @@ class WardRound(BaseWardRound):
         field_dict_copy = copy(field_dict)
         field_dict_copy["id"] = "id"
 
-        episodes = episodes.order_by(field_dict.keys()[0])
+        episodes = episodes.order_by(list(field_dict)[0])
         episodes = episodes.values(*field_dict_copy.keys())
         episodes = [
             {field_dict_copy[k]: v for k, v in episode.items()} for episode in episodes]
 
-        columns = field_dict.values()
+        columns = list(field_dict.values())
 
         return dict(name=self.display_name,
                     description=self.description,
                     episodes=episodes,
-                    fields=field_dict.values(),
+                    fields=list(field_dict.values()),
                     columns=columns,
                     auto_start=self.auto_start
                     )
