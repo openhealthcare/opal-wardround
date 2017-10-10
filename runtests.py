@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 """
 Standalone test runner for wardrounds plugin
 """

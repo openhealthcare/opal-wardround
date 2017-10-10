@@ -1,6 +1,8 @@
 """
 Urls for the OPAL wardrounds plugin
 """
+from __future__ import unicode_literals
+
 from django.conf.urls import patterns, url
 
 from wardround import views, api

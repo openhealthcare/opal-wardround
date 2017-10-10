@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from rest_framework.views import APIView
 from wardround.wardrounds import WardRound
 from opal.core.views import json_response

@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 """
 Dummy OPAL application for running standalone tests
 """

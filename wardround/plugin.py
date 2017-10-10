@@ -1,6 +1,8 @@
 """
 Plugin definition
 """
+from __future__ import unicode_literals
+
 from opal.core import plugins, menus
 
 from wardround.urls import urlpatterns
