@@ -66,10 +66,14 @@ class WardRound(BaseWardRound):
         field_dict_copy = copy(field_dict)
         field_dict_copy["id"] = "id"
 
-        episodes = episodes.order_by(list(field_dict)[0])
+        if not episodes.ordered:
+            episodes = episodes.order_by(list(field_dict)[0])
         episodes = episodes.values(*field_dict_copy.keys())
         episodes = [
-            {field_dict_copy[k]: v for k, v in episode.items()} for episode in episodes]
+            {
+                field_dict_copy[k]: v for k, v in episode.items()
+            } for episode in episodes
+        ]
 
         columns = list(field_dict.values())
 

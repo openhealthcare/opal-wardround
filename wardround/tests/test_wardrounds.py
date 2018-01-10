@@ -1,9 +1,10 @@
 import copy
-from mock import MagicMock
+from mock import MagicMock, patch
 from datetime import date
 from opal.core.test import OpalTestCase
 from opal.models import Patient, Episode
 from wardround.wardrounds import WardRound
+
 
 class TestWardround(WardRound):
     display_name = "test"
@@ -22,19 +23,19 @@ class TestWardround(WardRound):
 class WardroundTest(OpalTestCase):
 
     patient_1_dict = dict(
-        first_name = "James",
-        surname = "Jameson",
-        hospital_number = "2",
-        date_of_birth = date(1985, 10, 1),
-        sex_ft = "Male"
+        first_name="James",
+        surname="Jameson",
+        hospital_number="20",
+        date_of_birth=date(1985, 10, 1),
+        sex_ft="Male"
     )
 
     patient_2_dict = dict(
-        first_name = "Sue",
-        surname = "Smithson",
-        hospital_number = "1",
-        date_of_birth = date(1980, 10, 1),
-        sex_ft = "Female"
+        first_name="Sue",
+        surname="Smithson",
+        hospital_number="10",
+        date_of_birth=date(1980, 10, 1),
+        sex_ft="Female"
     )
 
     def setUp(self, *args, **kwargs):
@@ -64,7 +65,6 @@ class WardroundTest(OpalTestCase):
         mock_request = MagicMock(name='mock request')
         self.assertEqual(0, len(WardRound(mock_request).episodes()))
 
-
     def test_list_view_dict(self):
         table_dict = self.wardround.list_view_table()
         expected = {
@@ -78,7 +78,7 @@ class WardroundTest(OpalTestCase):
                     'Admitted': None,
                     'DOB': date(1980, 10, 1),
                     'Discharged': None,
-                    'Hospital #': u'1',
+                    'Hospital #': u'10',
                     'First Name': 'Sue',
                     'Surname': 'Smithson',
                     'id': 2
@@ -87,7 +87,7 @@ class WardroundTest(OpalTestCase):
                     'Admitted': None,
                     'DOB': date(1985, 10, 1),
                     'Discharged': None,
-                    'Hospital #': u'2',
+                    'Hospital #': u'20',
                     'First Name': 'James',
                     'Surname': 'Jameson',
                     'id': 1
@@ -116,7 +116,7 @@ class WardroundTest(OpalTestCase):
                     'DOB': date(1980, 10, 1),
                     'Discharged': None,
                     'Sex': "Female",
-                    'Hospital #': u'1',
+                    'Hospital #': u'10',
                     'First Name': 'Sue',
                     'Surname': 'Smithson',
                     'id': 2
@@ -126,7 +126,7 @@ class WardroundTest(OpalTestCase):
                     'DOB': date(1985, 10, 1),
                     'Discharged': None,
                     'Sex': "Male",
-                    'Hospital #': u'2',
+                    'Hospital #': u'20',
                     'First Name': 'James',
                     'Surname': 'Jameson',
                     'id': 1
@@ -139,3 +139,32 @@ class WardroundTest(OpalTestCase):
         }
 
         self.assertEqual(table_dict, expected)
+
+    def test_serialised_wardround_ordering(self):
+        with patch.object(self.wardround, 'episodes') as e:
+            e.return_value = Episode.objects.all().order_by(
+                "-patient__demographics__first_name"
+            )
+            found_ids = [
+                i["id"] for i in self.wardround.list_view_table()["episodes"]
+            ]
+            self.assertEqual(found_ids, [2, 1])
+
+        with patch.object(self.wardround, 'episodes') as e:
+            e.return_value = Episode.objects.all().order_by(
+                "patient__demographics__first_name"
+            )
+            found_ids = [
+                i["id"] for i in self.wardround.list_view_table()["episodes"]
+            ]
+            self.assertEqual(found_ids, [1, 2])
+
+    def test_default_wardround_ordering(self):
+        """ default ordering should be done by hospital_number
+        """
+        patient, episode = self.new_patient_and_episode_please()
+        patient.demographics_set.update(hospital_number=15)
+        found_ids = [
+            i["id"] for i in self.wardround.list_view_table()["episodes"]
+        ]
+        self.assertEqual(found_ids, [2, 3, 1])
