@@ -160,7 +160,8 @@ class WardroundTest(OpalTestCase):
             self.assertEqual(found_ids, [1, 2])
 
     def test_default_wardround_ordering(self):
-        """ default ordering should be done by hospital_number
+        """ default ordering should be done by the first column in the
+            wardround table
         """
         patient, episode = self.new_patient_and_episode_please()
         patient.demographics_set.update(hospital_number=15)
