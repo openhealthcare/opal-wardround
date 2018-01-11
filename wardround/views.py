@@ -1,10 +1,11 @@
 """
-Views for the OPAL Wardrounds plugin
+Views for the Opal Wardrounds plugin
 """
 from django.views.generic import View, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from opal.core.views import LoginRequiredMixin
 from opal.core.subrecords import subrecords
+
 from wardround.wardrounds import WardRound
 
 class WardRoundIndexView(LoginRequiredMixin, TemplateView):
