@@ -1,12 +1,11 @@
 """
 Urls for the OPAL wardrounds plugin
 """
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from wardround import views, api
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url('^wardround/$', views.WardRoundIndexView.as_view(), name="wardround_index"),
     url('^wardround/(?P<name>[a-z_]+)$', api.WardRoundView.as_view(), name="wardround_api_view"),
     url('^wardround/(?P<name>[a-z_]+)/find_patient$', api.FindPatientView.as_view(), name="find_patient_api_view"),
@@ -23,4 +22,4 @@ urlpatterns = patterns(
         views.WardRoundTemplateView.as_view(),
         name="wardround_named_template_view",
     ),
-)
+]

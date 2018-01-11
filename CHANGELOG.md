@@ -1,7 +1,11 @@
+## 0.10.0 Release
+
+Upgrades to Opal 0.10.
+Drops support for Django < 1.10.
+
 ## 0.9.0 Release
 Bumping dependency onto v0.9.0
 Uses the new .load syntax for metadata, reference data, record schema and user profile
-
 
 ## 0.8.0 Release
 
