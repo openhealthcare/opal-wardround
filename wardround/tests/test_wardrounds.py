@@ -140,6 +140,44 @@ class WardroundTest(OpalTestCase):
 
         self.assertEqual(table_dict, expected)
 
+    def test_find_patient_ordering(self):
+        # make sure order is preserved after we add a new patient
+        patient_3_dict = dict(
+            first_name="Zeta",
+            surname="Zenon",
+            hospital_number="10",
+            date_of_birth=date(1980, 10, 1),
+            sex_ft="Female"
+        )
+        patient_3 = Patient.objects.create()
+
+        patient_3.demographics_set.update(
+            **patient_3_dict
+        )
+        patient_3.create_episode()
+
+        with patch.object(self.wardround, 'episodes') as e:
+            e.return_value = Episode.objects.all().order_by(
+                "-patient__demographics__first_name"
+            )
+            found_ids = [
+                i["id"] for i in self.wardround.find_patient_table(
+                    [self.episode_1.id, self.episode_2.id]
+                )["episodes"]
+            ]
+            self.assertEqual(found_ids, [2, 1])
+
+        with patch.object(self.wardround, 'episodes') as e:
+            e.return_value = Episode.objects.all().order_by(
+                "patient__demographics__first_name"
+            )
+            found_ids = [
+                i["id"] for i in self.wardround.find_patient_table(
+                    [self.episode_1.id, self.episode_2.id]
+                )["episodes"]
+            ]
+            self.assertEqual(found_ids, [1, 2])
+
     def test_serialised_wardround_ordering(self):
         with patch.object(self.wardround, 'episodes') as e:
             e.return_value = Episode.objects.all().order_by(

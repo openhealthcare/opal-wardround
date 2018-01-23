@@ -90,5 +90,5 @@ class WardRound(BaseWardRound):
         return self.serialize(episodes, self.list_columns)
 
     def find_patient_table(self, episode_ids):
-        episodes = Episode.objects.filter(id__in=episode_ids)
+        episodes = self.episodes().filter(id__in=episode_ids)
         return self.serialize(episodes, self.find_patient_columns)
