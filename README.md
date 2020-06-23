@@ -1,5 +1,12 @@
 Virtual ward round plugin for OPAL.
 
+
+## ! Important Notice !
+
+This plugin is no longer actively maintiained - as it depends on a version of django that is no longer supported by OPAL
+
+
+
 [![Build Status](https://travis-ci.org/openhealthcare/opal-wardround.svg?branch=v0.10.0)](https://travis-ci.org/openhealthcare/opal-wardround)
 [![Coverage Status](https://coveralls.io/repos/github/openhealthcare/opal-wardround/badge.svg?branch=v0.10.0)](https://coveralls.io/github/openhealthcare/opal-wardround?branch=v0.10.0)
 [![PyPI version](https://badge.fury.io/py/opal-wardround.svg)](https://badge.fury.io/py/opal-wardround)
